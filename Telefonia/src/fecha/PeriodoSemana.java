@@ -1,30 +1,30 @@
 package fecha;
 
 public class PeriodoSemana {
-	private Fecha horaIni, horaFin;
+	private HoraSemana horaIni, horaFin;
 	public PeriodoSemana(){
 		this.horaIni = null;
 		this.horaFin = null;
 	}
 	
-	public PeriodoSemana(Fecha hIni, Fecha hFin){
+	public PeriodoSemana(HoraSemana hIni, HoraSemana hFin){
 		this.horaIni = hIni;
 		this.horaFin = hFin;		
 	}
 
-	public Fecha getHoraIni() {
+	public HoraSemana getHoraIni() {
 		return horaIni;
 	}
 
-	public Fecha getHoraFin() {
+	public HoraSemana getHoraFin() {
 		return horaFin;
 	}
 
-	public void setHoraIni(Fecha horaIni) {
+	public void setHoraIni(HoraSemana horaIni) {
 		this.horaIni = horaIni;
 	}
 
-	public void setHoraFin(Fecha horaFin) {
+	public void setHoraFin(HoraSemana horaFin) {
 		this.horaFin = horaFin;
 	}
 	

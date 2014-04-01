@@ -1,28 +1,20 @@
 package tarifas;
 
-import fecha.HoraSemana;
 import fecha.PeriodoSemana;
 
-public abstract class Tarifa {
+public abstract class CopyOfTarifa {
 	private int costeMinuto;
 	private PeriodoSemana periodoSemana;
 	private String nombre;
 	
-	public Tarifa(){
+	public CopyOfTarifa(){
 		
 	}
 	
-	public Tarifa(TipoTarifa tipoTarifa){
-		this.setCoste(tipoTarifa.getCoste());
-		
-		int n = tipoTarifa.getDia().getNdia();
-		if (n > 7)
-		
-		
-		HoraSemana hIni = new HoraSemana();
-		HoraSemana hFin = new HoraSemana();
-		this.setPeriodoSemana(new PeriodoSemana(hIni, hFin));
-		this.setNombre(tipoTarifa.getNombre());
+	public CopyOfTarifa(String nombre, PeriodoSemana pS,  int coste){
+		this.setCoste(coste);
+		this.setPeriodoSemana(pS);
+		this.setNombre(nombre);
 	}
 
 	
