@@ -12,15 +12,18 @@ public class TarifaAdicional extends Tarifa {
 	 * TarifaAdicional(tarifa, nobmre, pS, coste);
 	 * */
 
-	public TarifaAdicional(Tarifa tarifa, String nombre, PeriodoSemana pS, int coste) {
-		super(nombre, pS, coste);
+	public TarifaAdicional(Tarifa tarifa, TipoTarifa tipoTarifa) {
+		super(tipoTarifa);
 		this.tarifa = tarifa;
 	}
 
 	public double calcularCoste(Llamada ll) {
 		if(getPeriodoSemana().estaDentro(ll.getFecha())){
 			
+		}else{
+			
 		}
+		
 		return 0;
 	}
 

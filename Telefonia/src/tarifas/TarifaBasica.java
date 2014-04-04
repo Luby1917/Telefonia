@@ -1,7 +1,5 @@
 package tarifas;
 
-import fecha.PeriodoSemana;
-
 public class TarifaBasica extends Tarifa {
 
 	public TarifaBasica() {
@@ -9,8 +7,8 @@ public class TarifaBasica extends Tarifa {
 
 	}
 
-	public TarifaBasica(String nombre, PeriodoSemana pS, int coste) {
-		super(nombre, pS, coste);
+	public TarifaBasica (TipoTarifa tipoTarifa) {
+		super(tipoTarifa); 
 	}
 	
 }
