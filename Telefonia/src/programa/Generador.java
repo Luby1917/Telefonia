@@ -1,5 +1,8 @@
 package  programa;
 
+import tarifas.FactoriaTarifas;
+import tarifas.Tarifa;
+import tarifas.TipoTarifa;
 import cliente.Direccion;
 import cliente.Empresa;
 import cliente.Particular;
@@ -36,7 +39,7 @@ public class Generador {
 		String NIF = generador.getNIF();
 		String email = generaEmail(nombre, apellido);
 		Direccion dir = generaDireccion();
-		int tarifa = (int)(1+Math.random()*9);
+		Tarifa tarifa = generaTarifa();
 		Particular p = new Particular(nombre, telefono, apellido, NIF , dir, tarifa, email );
 		return p;
 	}
@@ -47,7 +50,7 @@ public class Generador {
 		String NIF = generador.getNIF();
 		String email = generaEmail(nombre, null);
 		Direccion dir = generaDireccion();
-		int tarifa = (int)(1+Math.random()*9);
+		Tarifa tarifa = generaTarifa();
 		Empresa e = new Empresa(nombre, telefono,  NIF , dir, tarifa, email );
 		return e;
 	}
@@ -75,6 +78,19 @@ public class Generador {
 			
 		}
 		return telefono;
+    	
+    }
+    
+    public Tarifa generaTarifa(){
+		Tarifa t= null;
+		FactoriaTarifas ft = new FactoriaTarifas();
+		TipoTarifa tipoTarifa;
+		for(int i = 1; i< 3; i++){
+			tipoTarifa = TipoTarifa.values()[i];
+			ft.anadirTarifaAdicional(tipoTarifa);
+		}
+		
+		return ft.getTarifa();
     	
     }
 
