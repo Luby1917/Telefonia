@@ -1,8 +1,10 @@
-package programa;
+package menu;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
+import programa.CarteraClientes;
 
 import llamadas.Llamada;
 import cliente.Cliente;
@@ -78,7 +80,7 @@ public class CopyOfMenu {
 		while (opcion != 0) {
 			switch (opcion) {
 
-			case 1:// añadir cliente
+			case 1:// aï¿½adir cliente
 				Cliente c = pedirDatosCliente();
 				cc.darDeAltaCliente(c);
 				System.out.println("Nuevo cliente aÃ±adido");
@@ -208,7 +210,7 @@ public class CopyOfMenu {
 		while (opcion != 0) {
 			switch (opcion) {
 
-			case 1:// añadir llamada (NIF)
+			case 1:// aï¿½adir llamada (NIF)
 
 				String NIF = pedirNIF();
 				Cliente c;
@@ -338,10 +340,10 @@ public class CopyOfMenu {
 		}
 		mes--;
 
-		int ano = pedirNumeroEntero("Introduce el año");
+		int ano = pedirNumeroEntero("Introduce el aï¿½o");
 		while(ano < 1999 || ano > 2099){	
-			System.out.println("Año incorrecto");
-			ano = pedirNumeroEntero("Introduce el año");
+			System.out.println("Aï¿½o incorrecto");
+			ano = pedirNumeroEntero("Introduce el aï¿½o");
 		}
 		ano--;	
 		

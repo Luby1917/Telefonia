@@ -1,6 +1,6 @@
 package  cliente;
 
-import tarifas.TarifaBasica;
+import tarifas.Tarifa;
 
 public class Particular extends Cliente {
  
@@ -14,7 +14,7 @@ public class Particular extends Cliente {
 		super();
 
 	}
-	public Particular(String nombre,String telefono, String apellidos, String NIF, Direccion direccion, TarifaBasica tarifa,	String correoE) {
+	public Particular(String nombre,String telefono, String apellidos, String NIF, Direccion direccion, Tarifa tarifa,	String correoE) {
 		super(nombre, telefono, NIF,  direccion,  tarifa,  correoE);
 		this.apellidos = apellidos;
 

@@ -28,7 +28,6 @@ public class HoraSemana implements Serializable {
 
 	}
 
-
 	public String toString() {
 		return Dia.getDia(dayOfWeek).getDescripcion()+sdf.format(calendar.getTime());
 

@@ -1,6 +1,6 @@
 package  generador;
 
-import tarifas.TarifaBasica;
+import tarifas.Tarifa;
 import cliente.Direccion;
 import cliente.Empresa;
 import cliente.Particular;
@@ -37,7 +37,7 @@ public class Generador {
 		String NIF = generador.getNIF();
 		String email = generaEmail(nombre, apellido);
 		Direccion dir = generaDireccion();
-		TarifaBasica tarifa = new TarifaBasica((int)(1+Math.random()*9));
+		Tarifa tarifa =generaTarifa();
 		Particular p = new Particular(nombre, telefono, apellido, NIF , dir, tarifa, email );
 		return p;
 	}
@@ -48,7 +48,7 @@ public class Generador {
 		String NIF = generador.getNIF();
 		String email = generaEmail(nombre, null);
 		Direccion dir = generaDireccion();
-		TarifaBasica tarifa = new TarifaBasica((int)(1+Math.random()*9));
+		Tarifa tarifa = generaTarifa();
 		Empresa e = new Empresa(nombre, telefono,  NIF , dir, tarifa, email );
 		return e;
 	}
@@ -67,6 +67,11 @@ public class Generador {
 		
 		return email+"@"+dominios[(int) (Math.random() * dominios.length)];
 
+	}
+	
+	public Tarifa generaTarifa(){
+		Tarifa tarifa = null;
+		return tarifa;
 	}
 	
     public String generaTelefono(){

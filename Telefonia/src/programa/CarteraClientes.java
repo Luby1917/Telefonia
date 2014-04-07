@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import llamadas.Llamada;
+import tarifas.Tarifa;
 import cliente.Cliente;
 import excepciones.ListaVaciaException;
 import excepciones.ObjetoNoEncontrado;
@@ -49,7 +50,7 @@ public class CarteraClientes implements Serializable {
 		return true;
 	}
 
-	public boolean cambiarTarifaCliente(String NIF, int tarifa)
+	public boolean cambiarTarifaCliente(String NIF, Tarifa tarifa)
 			throws ObjetoNoEncontrado {
 
 		if (clientes.containsKey(NIF)) {

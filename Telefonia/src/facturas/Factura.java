@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import tarifas.Tarifa;
 import tarifas.TarifaBasica;
 import llamadas.Llamada;
 
@@ -20,7 +21,7 @@ public class Factura implements InterfazFecha, Serializable {
 	private static int codBase = 0;
 	private int id;
 	private int minutosConsumidos;
-	private TarifaBasica tarifaAplicada;
+	private Tarifa tarifaAplicada;
 	private Fecha fechaEmision;
 	private List<Llamada> llamadas;
 	private String textoLlamadas;
@@ -31,7 +32,7 @@ public class Factura implements InterfazFecha, Serializable {
 
 	}
 
-	public Factura(TarifaBasica tarifaAplicada) {
+	public Factura(Tarifa tarifaAplicada) {
 		this.periodoFacturacion = new Periodo();
 		this.minutosConsumidos = 0;
 		this.tarifaAplicada = tarifaAplicada;
@@ -40,8 +41,9 @@ public class Factura implements InterfazFecha, Serializable {
 		this.id = codBase++;
 	}
 
-	private double calcularImporte(int minutos, TarifaBasica tarifa) {//TODO cambiar la forma de calcular el importe
-		return  ((double) minutos * tarifa.getCoste() / 100);
+	private double calcularImporte(Llamada llamada) {//TODO cambiar la forma de calcular el importe
+		double coste=  getTarifaAplicada().calcularCoste(llamada);
+		return  ((double) llamada.getDuracion() * coste / 100);
 	}
 
 	public double getImporte() {
@@ -50,7 +52,7 @@ public class Factura implements InterfazFecha, Serializable {
 
 	public void anadirLlamada(Llamada llamada) {
 		this.minutosConsumidos += llamada.getDuracion();
-		this.importe = calcularImporte(llamada.getDuracion(), llamada.getTarifa());
+		this.importe += calcularImporte(llamada);
 		llamadas.add(llamada);
 		textoLlamadas += ("\t" + llamada.toString());
 
@@ -76,7 +78,7 @@ public class Factura implements InterfazFecha, Serializable {
 		return minutosConsumidos;
 	}
 
-	public TarifaBasica getTarifaAplicada() {
+	public Tarifa getTarifaAplicada() {
 		return tarifaAplicada;
 	}
 

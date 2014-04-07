@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import menu.Menu;
+
 import carteraclientes.CarteraClientes;
 
 public class Programa {

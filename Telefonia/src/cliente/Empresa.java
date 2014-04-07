@@ -1,6 +1,6 @@
 package  cliente;
 
-import tarifas.TarifaBasica;
+import tarifas.Tarifa;
 
 public class Empresa extends Cliente {
 
@@ -16,7 +16,7 @@ public class Empresa extends Cliente {
 
 	}
 
-	public Empresa(String nombre, String telefono, String NIF, Direccion direccion, TarifaBasica tarifa, String correoE) {
+	public Empresa(String nombre, String telefono, String NIF, Direccion direccion, Tarifa tarifa, String correoE) {
 		super(nombre, telefono, NIF, direccion, tarifa, correoE);
 	}
 

@@ -4,10 +4,9 @@ package  llamadas;
 
 import fecha.Fecha;
 import interfaces.InterfazFecha;
-
 import java.io.Serializable;
+import tarifas.Tarifa;
 
-import tarifas.TarifaBasica;
 
 
 public class Llamada implements InterfazFecha, Serializable{
@@ -20,7 +19,7 @@ public class Llamada implements InterfazFecha, Serializable{
 	private String telefonoDestino;
 	private Fecha fechaLlamada;
 	private int duracion;
-	private TarifaBasica tarifa;
+	private Tarifa tarifa;
 	private int coste;
 
 
@@ -28,7 +27,7 @@ public class Llamada implements InterfazFecha, Serializable{
 
 	}
 
-	public Llamada(String telefonoCliente, String telefonoDestino, int duracion, TarifaBasica tarifa) {
+	public Llamada(String telefonoCliente, String telefonoDestino, int duracion, Tarifa tarifa) {
 		this.telefonoCliente = telefonoCliente;
 		this.telefonoDestino = telefonoDestino;
 		this.fechaLlamada = new Fecha();
@@ -37,6 +36,11 @@ public class Llamada implements InterfazFecha, Serializable{
 		this.setCoste(tarifa.getCoste()*duracion);//TODO cambiar la forma de calcular el coste
 	}
 
+	
+	private int calcularCoste(){
+		return tarifa.getCoste()*duracion;
+	}
+	
 	public String getTelefonoCliente() {
 		return telefonoCliente;
 	}
@@ -67,14 +71,16 @@ public class Llamada implements InterfazFecha, Serializable{
 
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
+		calcularCoste();
 	}
 
-	public TarifaBasica getTarifa() {
+	public Tarifa getTarifa() {
 		return tarifa;
 	}
 
-	public void setTarifa(TarifaBasica tarifa) {
+	public void setTarifa(Tarifa tarifa) {
 		this.tarifa = tarifa;
+		calcularCoste();
 	}
 
 	public int getCoste() {
@@ -83,6 +89,7 @@ public class Llamada implements InterfazFecha, Serializable{
 
 	public void setCoste(int coste) {
 		this.coste = coste;
+		calcularCoste();
 	}
 
 	public String toString(){

@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import llamadas.Llamada;
+import tarifas.Tarifa;
 import tarifas.TarifaBasica;
 
 public abstract class Cliente implements InterfazFecha, InterfazObjeto, Serializable {
@@ -29,7 +30,7 @@ public abstract class Cliente implements InterfazFecha, InterfazObjeto, Serializ
 	private String NIF;
 	private Direccion direccion;
 	private String correoE;
-	private TarifaBasica tarifa;
+	private Tarifa tarifa;
 	private Fecha fechaAlta;
 	private Factura facturaActual;
 	private Map<Integer, Factura> facturas;
@@ -39,7 +40,7 @@ public abstract class Cliente implements InterfazFecha, InterfazObjeto, Serializ
 
 	}
 
-	public Cliente(String nombre, String telefono, String NIF, Direccion direccion, TarifaBasica tarifa,
+	public Cliente(String nombre, String telefono, String NIF, Direccion direccion, Tarifa tarifa,
 			String correoE) {
 		this.telefono = telefono;
 		this.tarifa = tarifa;
@@ -58,11 +59,11 @@ public abstract class Cliente implements InterfazFecha, InterfazObjeto, Serializ
 		return fechaAlta;
 	}
 
-	public TarifaBasica getTarifa() {
+	public Tarifa getTarifa() {
 		return tarifa;
 	}
 
-	public void setTarifa(TarifaBasica tarifa) {
+	public void setTarifa(Tarifa tarifa) {
 		this.tarifa = tarifa;
 	}
 
@@ -155,7 +156,7 @@ public abstract class Cliente implements InterfazFecha, InterfazObjeto, Serializ
 
 		return "Nombre: " + nombre + "\nNIF: " + NIF + "\nDireccion: "
 				+ direccion + "\nCorreo-e: " + correoE + "\nTarifa: "
-				+ tarifa + "\nFecha de alta: " + fechaAlta + "\n";
+				+ tarifa.toString() + "\nFecha de alta: " + fechaAlta + "\n";
 
 	}
 

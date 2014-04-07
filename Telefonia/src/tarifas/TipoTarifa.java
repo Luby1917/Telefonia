@@ -5,6 +5,7 @@ import fecha.FranjaHoraria;
 
 
 public enum TipoTarifa {
+	TARIFA_BASICA("Tarifa Basica", 15, Dia.TODA_LA_SEMANA, FranjaHoraria.TODO_EL_DIA),
 	TARIFA_TARDE("Tarifa Tarde", 3, Dia.TODA_LA_SEMANA, FranjaHoraria.TARDE),
 	TARIFA_DOMINGO("Tarifa Domingo", 0, Dia.DOMINGO, FranjaHoraria.TODO_EL_DIA );
 
