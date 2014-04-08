@@ -7,6 +7,7 @@ import cliente.Cliente;
 import excepciones.ObjetoNoEncontrado;
 import excepciones.ObjetoYaExistente;
 import facturas.Factura;
+import generador.Generador;
 
 public class Iniciador {
 	static CarteraClientes cc;

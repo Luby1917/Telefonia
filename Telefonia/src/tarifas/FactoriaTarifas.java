@@ -3,27 +3,25 @@ package tarifas;
 import fecha.HoraSemana;
 import fecha.PeriodoSemana;
 
-
-
 public class FactoriaTarifas {
 	Tarifa tarifa;
-	public FactoriaTarifas() {
-		tarifa = crearTarifa(TipoTarifa.TARIFA_BASICA, null);
 	
- 
 
-		}
-	public Tarifa getTarifa(){
+	public FactoriaTarifas() {
+	}
+
+	public Tarifa crearTarifa() {
+		tarifa = crearTarifa(TipoTarifa.TARIFA_BASICA, null);
 		return tarifa;
 	}
-	
+
 	public Tarifa anadirTarifaAdicional(TipoTarifa tipoTarifa) {
-			tarifa =  crearTarifa(tipoTarifa, tarifa);
-			return tarifa;
-		}
-	
-	private Tarifa crearTarifa(TipoTarifa tipoTarifa, Tarifa tarifa){//TODO Revisar
-		
+		tarifa = crearTarifa(tipoTarifa, tarifa);
+		return tarifa;
+	}
+
+	private Tarifa crearTarifa(TipoTarifa tipoTarifa, Tarifa t) {// TODO Revisar
+
 		int nDia = tipoTarifa.getDia().getNdia();
 		int horaInicio = tipoTarifa.getFranjaHoraria().getHoraInicio();
 		int horaFinal = tipoTarifa.getFranjaHoraria().getHoraFin();
@@ -40,10 +38,18 @@ public class FactoriaTarifas {
 			hFin.setDiaSemana(nDia);
 			hFin.setHora(horaFinal, 0, 0);
 		}
-		Tarifa tarifaAdicional = new TarifaAdicional(tarifa, tipoTarifa.getNombre(),new PeriodoSemana(hIni, hFin),tipoTarifa.getCoste());
+		Tarifa tarifaAdicional;
+		if (t == null)
+			tarifaAdicional = new TarifaBasica(
+					tipoTarifa.getNombre(),	new PeriodoSemana(hIni, hFin),
+					tipoTarifa.getCoste());
+		else
+			tarifaAdicional = new TarifaAdicional(t,
+					tipoTarifa.getNombre(), new PeriodoSemana(hIni, hFin),
+					tipoTarifa.getCoste());
 
 		return tarifaAdicional;
-		
+
 	}
 
 }

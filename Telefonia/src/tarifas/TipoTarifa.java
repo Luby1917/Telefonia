@@ -8,7 +8,7 @@ public enum TipoTarifa {
 	TARIFA_BASICA("Tarifa Basica", 15, Dia.TODA_LA_SEMANA, FranjaHoraria.TODO_EL_DIA),
 	TARIFA_TARDE("Tarifa Tarde", 3, Dia.TODA_LA_SEMANA, FranjaHoraria.TARDE),
 	TARIFA_DOMINGO("Tarifa Domingo", 0, Dia.DOMINGO, FranjaHoraria.TODO_EL_DIA );
-
+	private static final int numeroDeTarifasBasicas = 1;
 	private Dia dia;
 	private FranjaHoraria franjaHoraria;
 	private String nombre;
@@ -43,12 +43,13 @@ public enum TipoTarifa {
 
 	public static String listar() {
 		String s = "";
-		for (TipoTarifa t : TipoTarifa.values()) {
+		for (int i = numeroDeTarifasBasicas; i< TipoTarifa.values().length; i++) {//No lista las basicas
+			TipoTarifa t= TipoTarifa.values()[i];
 			s+=t.ordinal()+".- "+t.getNombre()+
-					t.getCoste()+ "cent/min los "+
-					t.getDia()+ " de " +
-					t.getFranjaHoraria().getHoraInicio() +" a "+
-					t.getFranjaHoraria().getHoraFin() + "\n";
+					"\t"+t.getCoste()+ "cent/min los "+
+					"\t"+t.getDia().getDescripcion()+ " de " +
+					"\t"+t.getFranjaHoraria().getHoraInicio() +" a "+
+					"\t"+t.getFranjaHoraria().getHoraFin() + "\n";
 		}
 		return s;
 	}

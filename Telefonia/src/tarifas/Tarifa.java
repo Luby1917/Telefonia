@@ -79,4 +79,46 @@ public abstract class Tarifa {
 		this.tarifa = tarifa;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + costeMinuto;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result
+				+ ((periodoSemana == null) ? 0 : periodoSemana.hashCode());
+		result = prime * result + ((tarifa == null) ? 0 : tarifa.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tarifa other = (Tarifa) obj;
+		if (costeMinuto != other.costeMinuto)
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (periodoSemana == null) {
+			if (other.periodoSemana != null)
+				return false;
+		} else if (!periodoSemana.equals(other.periodoSemana))
+			return false;
+		if (tarifa == null) {
+			if (other.tarifa != null)
+				return false;
+		} else if (!tarifa.equals(other.tarifa))
+			return false;
+		return true;
+	}
+	
+	
 }

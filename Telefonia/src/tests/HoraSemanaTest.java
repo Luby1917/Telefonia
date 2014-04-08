@@ -33,7 +33,9 @@ public class HoraSemanaTest {
 	@Test
 	public void testHoraSemanaIntIntIntInt() {
 
-		HoraSemana hs = new HoraSemana(diaS, hora, min, seg);
+		HoraSemana hs = new HoraSemana();
+		hs.setDiaSemana(diaS);
+		hs.setHora( hora, min, seg);
 		assertEquals(diaS, hs.getDiaSemana());
 		assertEquals(hora, hs.getHora());
 		assertEquals(min, hs.getMinutos());
@@ -43,52 +45,50 @@ public class HoraSemanaTest {
 
 	@Test
 	public void testSetHora() {
-		h.setHora(hora);
+		h.setHora(hora, min, seg);
 		assertEquals(hora, h.getHora());
-
-	}
-
-	@Test
-	public void testSetMinutos() {
-		h.setMinutos(min);
 		assertEquals(min, h.getMinutos());
-	}
-
-	@Test
-	public void testSetSegundos() {
-		h.setSegundos(seg);
 		assertEquals(seg, h.getSegundos());
-	}
-
-	@Test
-	public void testSetDiaSemana() {
-		h.setDiaSemana(diaS);
-		assertEquals(diaS, h.getDiaSemana());
 
 	}
+
+	
 
 	@Test
 	public void testCompareTo() {
 		HoraSemana h2;
-		h = new HoraSemana(4, 20, 43, 12);
-		h2 = new HoraSemana(5, 23, 43, 12);
+		h = new HoraSemana();
+		h.setDiaSemana(4);
+		h.setHora(20, 43, 12);
+		
+		h2 = new HoraSemana();
+		h2.setDiaSemana(5);
+		h2.setHora(23, 43, 12);
 		assertEquals(-1, h.compareTo(h2));
 
-		h2 = new HoraSemana(3, 23, 43, 12);
+		h2 = new HoraSemana();
+		h2.setDiaSemana(3);
+		h2.setHora(23, 43, 12);
 		assertEquals(1, h.compareTo(h2));
 
-		h2 = new HoraSemana(4, 19, 43, 12);
+		h2 = new HoraSemana();
+		h2.setDiaSemana(4);
+		h2.setHora( 19, 43, 12);
 		assertEquals(1, h.compareTo(h2));
 
-		h2 = new HoraSemana(4, 20, 42, 12);
+		h2 = new HoraSemana();
+		h2.setDiaSemana(4);
+		h2.setHora( 20, 42, 12);
 		assertEquals(1, h.compareTo(h2));
 
-		h2 = new HoraSemana(4, 20, 43, 11);
+		h2 = new HoraSemana();
+		h2.setDiaSemana(4);
+		h2.setHora( 20, 43, 11);
 		assertEquals(1, h.compareTo(h2));
-		
-		
-		
-		h2 = new HoraSemana(4, 20, 43, 12);
+			
+		h2 = new HoraSemana();
+		h2.setDiaSemana(4);
+		h2.setHora(20, 43, 12);
 		assertEquals(0, h.compareTo(h2));
 	}
 

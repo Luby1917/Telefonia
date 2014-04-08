@@ -79,7 +79,7 @@ public class LectorDatos {
 	public TipoTarifa pedirTipoTarifa(){
 		TipoTarifa tipoTarifa = null;
 		boolean loop = true;
-		System.out.println(TipoCliente.listar());
+		System.out.println(TipoTarifa.listar());
 		while (loop){
 			int opcion = pedirNumeroEntero("Elige el tipo de tarifa extra");
 			try{
@@ -97,16 +97,18 @@ public class LectorDatos {
 		boolean loop= true;
 		TipoTarifa tipoTarifa= null;
 		List<TipoTarifa> listaTarifas=new ArrayList<TipoTarifa>();
-		Tarifa tarifa = null;
+		Tarifa tarifa = ft.crearTarifa();
 		while (loop){
 			tipoTarifa = pedirTipoTarifa();
 			if(!listaTarifas.contains(tipoTarifa)){
 				tarifa = ft.anadirTarifaAdicional(tipoTarifa);
 				listaTarifas.add(tipoTarifa);
 			}else{
-				System.out.println("Esta tarifa extra ya la has añadido");
+				System.out.println("Esta tarifa extra ya la has añadido");//TODO ortografia
 			}
-			System.out.println("Pulsa 0 para terminar");
+			if(pedirNumeroEntero("Elige el tipo de tarifa extra")==0){
+				loop=false;
+			}
 		}
 		return tarifa;
 	}
@@ -126,10 +128,10 @@ public class LectorDatos {
 		}
 		mes--;
 
-		int ano = pedirNumeroEntero("Introduce el a�o");
+		int ano = pedirNumeroEntero("Introduce el a�o");//TODO ortografia
 		while (ano < 1999 || ano > 2099) {
-			System.out.println("A�o incorrecto");
-			ano = pedirNumeroEntero("Introduce el a�o");
+			System.out.println("A�o incorrecto");//TODO ortografia
+			ano = pedirNumeroEntero("Introduce el a�o");//TODO ortografia
 		}
 		
 		Fecha f = new Fecha();

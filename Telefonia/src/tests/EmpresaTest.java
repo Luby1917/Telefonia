@@ -4,27 +4,28 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import excepciones.ObjetoNoEncontrado;
+import fecha.Fecha;
+import generador.Generador;
 import llamadas.Llamada;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tarifas.TarifaBasica;
+import tarifas.Tarifa;
 import cliente.Direccion;
 import cliente.Empresa;
-import cliente.Particular;
-import excepciones.ObjetoNoEncontrado;
-import fecha.Fecha;
 
 public class EmpresaTest {
-
+	Generador gn;
 	Empresa e;
 	Fecha f;
-	TarifaBasica t;
+	Tarifa t;
 	@Before
 	public void init(){
-		t = new TarifaBasica(1);
+		gn = new Generador();
+		t = gn.generaTarifa();
 		Direccion direccion = new Direccion(1, "A", "A");
 		e = new Empresa("A", "A", "A", direccion, t, "A");
 		f = new Fecha();
@@ -32,6 +33,7 @@ public class EmpresaTest {
 	
 	@After
 	public void finish(){
+		gn =null;
 		e = null;
 		f = null;
 	}

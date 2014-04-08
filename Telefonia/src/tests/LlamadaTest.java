@@ -3,29 +3,33 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import fecha.Fecha;
+import generador.Generador;
 import llamadas.Llamada;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tarifas.TarifaBasica;
-import fecha.Fecha;
+import tarifas.Tarifa;
 
 public class LlamadaTest {
 	Llamada ll;
-	TarifaBasica tarifa;
+	Tarifa tarifa;
+	Generador gn;
 	
 	@Before
 	public void init() {
+		gn = new Generador();
 		ll = new Llamada();
-		tarifa = new TarifaBasica(5);
+		tarifa = gn.generaTarifa();
 		
 
 	}
 
 	@After
 	public void finish() {
+		gn = null;
 		ll = null;
 		tarifa = null;
 
@@ -72,6 +76,7 @@ public class LlamadaTest {
 	@Test
 	public void testSetDuracion() {
 		int duracion = 2;
+		ll = new Llamada("", "", 0, gn.generaTarifa());
 		ll.setDuracion(duracion);
 		assertEquals(duracion, ll.getDuracion());
 	}
@@ -86,6 +91,7 @@ public class LlamadaTest {
 	@Test
 	public void testSetCoste() {
 		int coste = 4;
+		ll = new Llamada("", "", 0, gn.generaTarifa());
 		ll.setCoste(coste);
 		assertEquals(coste, ll.getCoste());
 	}

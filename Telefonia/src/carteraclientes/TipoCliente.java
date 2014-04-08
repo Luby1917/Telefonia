@@ -13,7 +13,7 @@ public enum TipoCliente {
 	public static String listar() {
 		String s = "";
 		for (TipoCliente t : TipoCliente.values()) {
-			s+=t.ordinal()+".- "+t.getDescripcion();		
+			s+=t.ordinal()+".- "+t.getDescripcion()+"\n";		
 		}
 		return s;
 	}

@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import excepciones.ObjetoNoEncontrado;
+import facturas.Factura;
+import fecha.Fecha;
+import generador.Generador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,21 +18,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tarifas.Tarifa;
 import tarifas.TarifaBasica;
 import cliente.Direccion;
 import cliente.Particular;
-import excepciones.ObjetoNoEncontrado;
-import facturas.Factura;
-import fecha.Fecha;
 
 public class ParticularTest {
+	Generador gn;
 	Particular p;
 	Fecha f;
-	TarifaBasica tarifa;
+	Tarifa tarifa;
 
 	@Before
 	public void init() {
-		tarifa = new TarifaBasica(5);
+		gn = new Generador();
+		tarifa = gn.generaTarifa();
 		Direccion direccion = new Direccion(1, "A", "A");
 		p = new Particular("A", "A", "A", "A", direccion, tarifa, "A");
 		f = new Fecha();
@@ -90,7 +94,7 @@ public class ParticularTest {
 
 	@Test
 	public void testSetTarifa() {
-		TarifaBasica t = new TarifaBasica(4);
+		Tarifa t = gn.generaTarifa();;
 		p.setTarifa(t);
 		assertEquals(t, p.getTarifa());
 	}

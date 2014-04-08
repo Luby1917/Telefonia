@@ -42,8 +42,8 @@ public class Factura implements InterfazFecha, Serializable {
 	}
 
 	private double calcularImporte(Llamada llamada) {//TODO cambiar la forma de calcular el importe
-		double coste=  getTarifaAplicada().calcularCoste(llamada);
-		return  ((double) llamada.getDuracion() * coste / 100);
+		double coste =  getTarifaAplicada().calcularCoste(llamada);
+		return  ((double)( llamada.getDuracion() * coste)) / 100;
 	}
 
 	public double getImporte() {

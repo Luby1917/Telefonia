@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import excepciones.ObjetoNoEncontrado;
+import excepciones.ObjetoYaExistente;
+import facturas.Factura;
+import generador.Generador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,38 +18,36 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tarifas.Tarifa;
 import tarifas.TarifaBasica;
 import carteraclientes.CarteraClientes;
 import cliente.Cliente;
 import cliente.Direccion;
 import cliente.Empresa;
 import cliente.Particular;
-import excepciones.ObjetoNoEncontrado;
-import excepciones.ObjetoYaExistente;
-import facturas.Factura;
 
 public class CarteraClientesTest {
-
+	Generador gn;
 	CarteraClientes pr;
 	Cliente c;
 	Cliente c2;
-	TarifaBasica t;
+	Tarifa t;
 	List<Cliente> listaClientes;
 
 	@Before
 	public void init() {
-
+		gn = new Generador();
 		pr = new CarteraClientes();
 		listaClientes = new ArrayList<Cliente>(20);
 		Direccion direccion = new Direccion(1, "A", "A");
-		t = new TarifaBasica(1);
+		t = gn.generaTarifa();
 		c = new Particular("A", "A", "A", "A", direccion, t, "A");
 		try {
 			pr.darDeAltaCliente(c);
 		} catch (ObjetoYaExistente e) {
 			fail("Este cliente no existe (A)");
 		}
-		t = new TarifaBasica(2);
+		t = gn.generaTarifa();
 		Direccion direccion2 = new Direccion(2, "B", "B");
 		c2 = new Empresa("B", "B", "B", direccion2, t, "B");
 		try {
@@ -141,8 +143,7 @@ public class CarteraClientesTest {
 
 	@Test
 	public void testCambiarTarifaCliente() {
-		int coste = 3;
-		TarifaBasica tarifa = new TarifaBasica(coste);
+		Tarifa tarifa = gn.generaTarifa();
 		
 		try {
 			pr.cambiarTarifaCliente("A", tarifa);
