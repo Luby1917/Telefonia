@@ -4,11 +4,10 @@ import java.io.Serializable;
 
 public class Direccion implements Serializable {
 
-	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4826758535931497262L;
 	private int codPostal;
 	private String provincia;
 	private String poblacion;

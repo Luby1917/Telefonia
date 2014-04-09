@@ -4,12 +4,10 @@ import tarifas.Tarifa;
 
 public class Empresa extends Cliente {
 
-
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7777352243003647246L;
 
 	public Empresa() {
 		super();

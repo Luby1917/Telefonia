@@ -4,6 +4,11 @@ import fecha.PeriodoSemana;
 
 public class TarifaBasica extends Tarifa {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1814654976039740229L;
+
 	public TarifaBasica() {
 		super();
 

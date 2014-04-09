@@ -1,9 +1,17 @@
 package tarifas;
 
+import java.io.Serializable;
+
 import llamadas.Llamada;
 import fecha.PeriodoSemana;
 
-public abstract class Tarifa {
+public abstract class Tarifa   implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8600543543180760546L;
+
+
 	public static int PRECIO_BASICO = 15;
 	
 	
@@ -23,10 +31,17 @@ public abstract class Tarifa {
 	}
 
 	public String toString() {
+		if (tarifa != null)
 			return "Tarifa " + getNombre() +
 						"\nHorario "	+ getPeriodoSemana().toString() + 
 						"\nCoste " + getCoste() +
 						"\n"+ tarifa.toString() + "\n";
+		else
+			return "Tarifa " + getNombre() +
+					"\nHorario "	+ getPeriodoSemana().toString() + 
+					"\nCoste " + getCoste() +
+					"\n";
+			
 	}
 	
 	public double calcularCoste(Llamada ll) {// llamada a analizar y

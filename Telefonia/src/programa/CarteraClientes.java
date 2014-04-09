@@ -21,10 +21,11 @@ import facturas.Factura;
 import fecha.Periodo;
 
 public class CarteraClientes implements Serializable {
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2329351183523041422L;
 	private Map<String, Cliente> clientes;
 
 	public CarteraClientes() {

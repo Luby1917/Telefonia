@@ -1,6 +1,12 @@
 package fecha;
 
-public class PeriodoSemana {
+import java.io.Serializable;
+
+public class PeriodoSemana  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1386303151887076509L;
 	private HoraSemana horaIni, horaFin;
 	public PeriodoSemana(){
 		this.horaIni = null;
@@ -33,5 +39,9 @@ public class PeriodoSemana {
 			return true;
 		return false;
 		
+	}
+	
+	public String toString(){
+		return horaIni.toString()+" a "+ horaFin.toString()+"\n";
 	}
 }

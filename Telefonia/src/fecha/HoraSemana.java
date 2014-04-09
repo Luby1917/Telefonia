@@ -6,8 +6,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class HoraSemana implements Serializable {
-	private static final long serialVersionUID = 1L;
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3442368762836814291L;
 	Calendar calendar;
 	SimpleDateFormat sdf;
 	 private int dayOfWeek;
@@ -29,7 +33,7 @@ public class HoraSemana implements Serializable {
 	}
 
 	public String toString() {
-		return Dia.getDia(dayOfWeek).getDescripcion()+sdf.format(calendar.getTime());
+		return Dia.getDia(dayOfWeek).getDescripcion()+" "+sdf.format(calendar.getTime());
 
 	}
 

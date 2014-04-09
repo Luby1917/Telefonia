@@ -8,8 +8,7 @@ public enum TarifasExtraFranjaHoraria implements TipoTarifa {
 	TARIFA_MANANA("Tarifa Mañana", 3, Dia.TODA_LA_SEMANA, FranjaHoraria.MANANA),
 	TARIFA_TARDE("Tarifa Tarde", 3, Dia.TODA_LA_SEMANA, FranjaHoraria.TARDE),
 	TARIFA_NOCHE("Tarifa Noche", 3, Dia.TODA_LA_SEMANA, FranjaHoraria.NOCHE);
-	
-	private static final int numeroDeTarifasBasicas = 1;
+		
 	private Dia dia;
 	private FranjaHoraria franjaHoraria;
 	private String nombre;
@@ -44,7 +43,7 @@ public enum TarifasExtraFranjaHoraria implements TipoTarifa {
 
 	public static  String listar() {
 		String s = "";
-		for (int i = numeroDeTarifasBasicas; i< TarifasExtraFranjaHoraria.values().length; i++) {//No lista las basicas
+		for (int i = 0; i< TarifasExtraFranjaHoraria.values().length; i++) {
 			TarifasExtraFranjaHoraria t= TarifasExtraFranjaHoraria.values()[i];
 			s+=t.ordinal()+".- "+t.getNombre()+
 					"\t"+t.getCoste()+ "cent/min los "+

@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tarifas.Tarifa;
-import tarifas.TarifaBasica;
 import llamadas.Llamada;
 
 public class Factura implements InterfazFecha, Serializable {
 
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2676748147264302430L;
 	private static int codBase = 0;
 	private int id;
 	private int minutosConsumidos;

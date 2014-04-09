@@ -16,15 +16,15 @@ import java.util.Map.Entry;
 
 import llamadas.Llamada;
 import tarifas.Tarifa;
-import tarifas.TarifaBasica;
+
 
 public abstract class Cliente implements InterfazFecha, InterfazObjeto, Serializable {
 
-	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2663876323273019816L;
 	private String nombre;
 	private String telefono;
 	private String NIF;

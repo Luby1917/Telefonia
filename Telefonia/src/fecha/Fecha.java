@@ -6,8 +6,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Fecha implements Serializable {
-	private static final long serialVersionUID = 1L;
+
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6279920757413210475L;
 	Calendar calendar;
 	SimpleDateFormat sdf;
 

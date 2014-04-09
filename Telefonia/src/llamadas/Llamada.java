@@ -11,10 +11,11 @@ import tarifas.Tarifa;
 
 public class Llamada implements InterfazFecha, Serializable{
 	
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8636849668464694134L;
 	private String telefonoCliente;
 	private String telefonoDestino;
 	private Fecha fechaLlamada;

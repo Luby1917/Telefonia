@@ -2,23 +2,15 @@ package menu;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 
 import llamadas.Llamada;
 import tarifas.FactoriaTarifas;
-import tarifas.Tarifa;
-import tarifas.TarifasExtraFranjaHoraria;
 import carteraclientes.CarteraClientes;
 import carteraclientes.FactoriaClientes;
-import carteraclientes.TipoCliente;
 import cliente.Cliente;
-import cliente.Direccion;
-import cliente.Empresa;
-import cliente.Particular;
 import excepciones.ObjetoNoEncontrado;
 import excepciones.ObjetoYaExistente;
 import facturas.Factura;
-import fecha.Fecha;
 import fecha.Periodo;
 
 public class Menu {

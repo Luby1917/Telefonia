@@ -1,9 +1,15 @@
 package tarifas;
 
+import java.io.Serializable;
+
 import fecha.HoraSemana;
 import fecha.PeriodoSemana;
 
-public class FactoriaTarifas {
+public class FactoriaTarifas   implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7490482623481287424L;
 	Tarifa tarifa;
 	
 
