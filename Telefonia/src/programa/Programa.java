@@ -24,7 +24,7 @@ public class Programa {
 
 	private static void guardar() {
 		try {
-			FileOutputStream fos = new FileOutputStream("cartera.bin");
+			FileOutputStream fos = new FileOutputStream("cartera2.bin");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(cc);
 			oos.close();
@@ -42,6 +42,7 @@ public class Programa {
 			ois.close();
 		} catch (Exception e) {
 			System.out.println("Fallo al intentar cargar el programa");
+			cc = new CarteraClientes();
 			e.printStackTrace();
 		}
 

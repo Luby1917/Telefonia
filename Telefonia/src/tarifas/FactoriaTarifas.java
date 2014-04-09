@@ -11,7 +11,7 @@ public class FactoriaTarifas {
 	}
 
 	public Tarifa crearTarifa() {
-		tarifa = crearTarifa(TipoTarifa.TARIFA_BASICA, null);
+		tarifa = crearTarifa(TarifasBasicas.TARIFA_BASICA, null);
 		return tarifa;
 	}
 

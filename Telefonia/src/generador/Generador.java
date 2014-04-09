@@ -2,7 +2,7 @@ package  generador;
 
 import tarifas.FactoriaTarifas;
 import tarifas.Tarifa;
-import tarifas.TipoTarifa;
+import tarifas.TarifasExtraFranjaHoraria;
 import cliente.Direccion;
 import cliente.Empresa;
 import cliente.Particular;
@@ -84,11 +84,11 @@ public class Generador {
     public Tarifa generaTarifa(){
 		Tarifa t= null;
 		FactoriaTarifas ft = new FactoriaTarifas();
-		TipoTarifa tipoTarifa;
+		TarifasExtraFranjaHoraria tipoTarifa;
 		
 		t = ft.crearTarifa();
 		for(int i = 1; i< 3; i++){
-			tipoTarifa = TipoTarifa.values()[i];
+			tipoTarifa = TarifasExtraFranjaHoraria.values()[i];
 			t = ft.anadirTarifaAdicional(tipoTarifa);
 		}
 		

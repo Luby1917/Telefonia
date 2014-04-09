@@ -7,7 +7,7 @@ import java.util.Scanner;
 import llamadas.Llamada;
 import tarifas.FactoriaTarifas;
 import tarifas.Tarifa;
-import tarifas.TipoTarifa;
+import tarifas.TarifasExtraFranjaHoraria;
 import carteraclientes.CarteraClientes;
 import carteraclientes.FactoriaClientes;
 import carteraclientes.TipoCliente;

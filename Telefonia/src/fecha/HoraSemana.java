@@ -67,15 +67,36 @@ public class HoraSemana implements Serializable {
 		/**
 		 * f1.compareTo(f2) si f1 es mayor : 1 si f1 es menor : -1
 		 * 
-		 */
+		
 		if (calendar.after(f.calendar))// this es mayor que f
 			return 1;
-		if (calendar.equals(f.calendar))// this es igual que f
+		else if (calendar.equals(f.calendar))// this es igual que f
 			return 0;
-		if (calendar.before(f.calendar))// this es menor que f
+		else if (calendar.before(f.calendar))// this es menor que f
 			return -1;
 		return -1;
+		*/
+		if (dayOfWeek > f.getDiaSemana())
+			return 1;
+		else if (dayOfWeek < f.getDiaSemana())
+			return -1;	
+		else if (hour > f.getHora())
+			return 1;
+		else if (hour < f.getHora())
+			return -1;
+		else if (minute > f.getMinutos())
+			return 1;
+		else if (minute < f.getMinutos())
+			return -1;
+		else if (seconds > f.getSegundos())
+			return 1;
+		else if (seconds < f.getSegundos())
+			return -1;
+		else
+			return 0;
+
 	}
+	
 	
 	public int compararSemana(Fecha f) {
 	

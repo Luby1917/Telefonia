@@ -23,9 +23,10 @@ public abstract class Tarifa {
 	}
 
 	public String toString() {
-			return "Tarifa" + getNombre() +
-						"\nHorario"	+ getPeriodoSemana().toString() + 
-						"\nCoste" + getCoste();
+			return "Tarifa " + getNombre() +
+						"\nHorario "	+ getPeriodoSemana().toString() + 
+						"\nCoste " + getCoste() +
+						"\n"+ tarifa.toString() + "\n";
 	}
 	
 	public double calcularCoste(Llamada ll) {// llamada a analizar y

@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import tarifas.FactoriaTarifas;
 import tarifas.Tarifa;
+import tarifas.TarifasExtraDiaGratis;
+import tarifas.TarifasExtraFranjaHoraria;
 import tarifas.TipoTarifa;
 import carteraclientes.TipoCliente;
 import cliente.Cliente;
@@ -76,40 +78,50 @@ public class LectorDatos {
 		return NIF;
 	}
 
-	public TipoTarifa pedirTipoTarifa(){
+	public TipoTarifa pedirTipoTarifa(int tarifa){//TODO
 		TipoTarifa tipoTarifa = null;
-		boolean loop = true;
-		System.out.println(TipoTarifa.listar());
-		while (loop){
-			int opcion = pedirNumeroEntero("Elige el tipo de tarifa extra");
-			try{
-				tipoTarifa = TipoTarifa.values()[opcion];
-			loop = false;
-			}catch (Exception e) {
-				System.out.println("ERROR");
-				System.out.println("Opcion incorrecta");
+		boolean loop;
+		switch(tarifa){
+		case 0:
+			loop = true;
+			System.out.println(TarifasExtraFranjaHoraria.listar());
+			while (loop){
+				int opcion = pedirNumeroEntero("Elige el tipo de tarifa extra");
+				try{
+					tipoTarifa = TarifasExtraFranjaHoraria.values()[opcion];
+					loop = false;
+				}catch (Exception e) {
+					System.out.println("ERROR");
+					System.out.println("Opcion incorrecta");
+				}
 			}
+			break;		
+		case 1:
+			loop = true;
+			System.out.println(TarifasExtraDiaGratis.listar());
+			while (loop){
+				int opcion = pedirNumeroEntero("Elige el tipo de tarifa extra");
+				try{
+					tipoTarifa = TarifasExtraDiaGratis.values()[opcion];
+					loop = false;
+				}catch (Exception e) {
+					System.out.println("ERROR");
+					System.out.println("Opcion incorrecta");
+				}
+			}
+			break;
 		}
 		return tipoTarifa;
 	}
 	
 	public Tarifa pedirTarifa() {//TODO 
-		boolean loop= true;
 		TipoTarifa tipoTarifa= null;
-		List<TipoTarifa> listaTarifas=new ArrayList<TipoTarifa>();
 		Tarifa tarifa = ft.crearTarifa();
-		while (loop){
-			tipoTarifa = pedirTipoTarifa();
-			if(!listaTarifas.contains(tipoTarifa)){
-				tarifa = ft.anadirTarifaAdicional(tipoTarifa);
-				listaTarifas.add(tipoTarifa);
-			}else{
-				System.out.println("Esta tarifa extra ya la has añadido");//TODO ortografia
-			}
-			if(pedirNumeroEntero("Elige el tipo de tarifa extra")==0){
-				loop=false;
-			}
-		}
+		
+		tipoTarifa = pedirTipoTarifa(0);		
+		tarifa = ft.anadirTarifaAdicional(tipoTarifa);
+		tipoTarifa = pedirTipoTarifa(1);		
+		tarifa = ft.anadirTarifaAdicional(tipoTarifa);			
 		return tarifa;
 	}
 
