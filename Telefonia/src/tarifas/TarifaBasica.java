@@ -11,11 +11,13 @@ public class TarifaBasica extends Tarifa {
 
 	public TarifaBasica() {
 		super();
+		super.setTarifa(null);
 
 	}
 
 	public TarifaBasica(String nombre, PeriodoSemana pS, int coste) {
 		super(nombre, pS, coste);
+		super.setTarifa(null);
 	}
 	
 }

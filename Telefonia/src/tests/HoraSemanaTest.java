@@ -2,11 +2,12 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 
-
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import fecha.Fecha;
 import fecha.HoraSemana;
 
 public class HoraSemanaTest {
@@ -30,6 +31,15 @@ public class HoraSemanaTest {
 		h = null;
 	}
 
+	@AfterClass
+	public static void f() {//TODO
+		System.out.println("\n\n");
+		HoraSemana hs = new HoraSemana();
+		hs.setDiaSemana(1);
+		hs.setHora( 14, 15, 15);
+		System.out.println(hs);
+	}
+	
 	@Test
 	public void testHoraSemanaIntIntIntInt() {
 
@@ -90,6 +100,44 @@ public class HoraSemanaTest {
 		h2.setDiaSemana(4);
 		h2.setHora(20, 43, 12);
 		assertEquals(0, h.compareTo(h2));
+	}
+	@Test
+	public void testCompararSemana() {
+		Fecha f;
+		h = new HoraSemana();
+		h.setDiaSemana(4);
+		h.setHora(20, 43, 12);
+		
+		f = new Fecha();
+		f.setDiaSemana(5);
+		f.setHora(23, 43, 12);
+		assertEquals(-1, h.compararSemana(f));
+
+		f = new Fecha();
+		f.setDiaSemana(3);
+		f.setHora(23, 43, 12);
+		assertEquals(1, h.compararSemana(f));
+
+		f = new Fecha();
+		f.setDiaSemana(4);
+		f.setHora( 19, 43, 12);
+		assertEquals(1, h.compararSemana(f));
+
+		f = new Fecha();
+		f.setDiaSemana(4);
+		f.setHora( 20, 42, 12);
+		assertEquals(1, h.compararSemana(f));
+
+		f = new Fecha();
+		f.setDiaSemana(4);
+		f.setHora( 20, 43, 11);
+		assertEquals(1, h.compararSemana(f));
+			
+		f = new Fecha();
+		f.setDiaSemana(4);
+		f.setHora(20, 43, 12);
+		assertEquals(0, h.compararSemana(f));
+		
 	}
 
 }

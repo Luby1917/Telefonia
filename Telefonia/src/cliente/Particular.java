@@ -32,7 +32,7 @@ public class Particular extends Cliente {
 				"\nTelefono: "+getTelefono()+
 				"\nDireccion: "+getDireccion()+
 				"\nCorreo-e: "+getCorreoE()+
-				"\nTarifa: "+getTarifa()+
+				"\nTarifa: \n"+getTarifa()+
 				"\nFecha de alta: "+getFecha()+
 				"\n";
 	}

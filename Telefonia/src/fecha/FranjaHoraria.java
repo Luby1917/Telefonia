@@ -12,10 +12,10 @@ public enum FranjaHoraria {
 	private int horaInicio;
 	private int horaFin;
 
-	private FranjaHoraria(String descrpicion, int horaInicio, int horaFin) {
+	private FranjaHoraria(String descrpicion, int hInicio, int hFin) {
 		this.descripcion = descrpicion;
-		this.horaInicio=horaInicio;
-		this.horaFin=horaFin;
+		this.horaInicio=hInicio;
+		this.horaFin=hFin;
 	}
 	
 	public static FranjaHoraria getOpcion(int posicion) {

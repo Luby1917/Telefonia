@@ -32,12 +32,12 @@ public abstract class Tarifa   implements Serializable{
 
 	public String toString() {
 		if (tarifa != null)
-			return "Tarifa " + getNombre() +
+			return "" + getNombre() +
 						"\nHorario "	+ getPeriodoSemana().toString() + 
 						"\nCoste " + getCoste() +
-						"\n"+ tarifa.toString() + "\n";
+						"\n\n"+ tarifa.toString() + "\n";
 		else
-			return "Tarifa " + getNombre() +
+			return "" + getNombre() +
 					"\nHorario "	+ getPeriodoSemana().toString() + 
 					"\nCoste " + getCoste() +
 					"\n";
@@ -45,14 +45,19 @@ public abstract class Tarifa   implements Serializable{
 	}
 	
 	public double calcularCoste(Llamada ll) {// llamada a analizar y
+
+		
 		if (getPeriodoSemana().estaDentro(ll.getFecha())) {// Si la llamada esta dentro de la franja horaria
 			if (this.getCoste() == 0) {// si el precio es 0, no puede ser inferior, no seguimos buscando
+				System.out.println("Calcular Coste: "+this.getClass().getName()+"--"+this.getCoste());
+				
 				ll.setTarifa(this);
 				ll.setCoste(0);
 				return 0;
 			} else {
 				if (tarifa != null) {// mientras sea tarifa adicional
 					if (costeMinuto < tarifa.calcularCoste(ll)) {// Si el precio de esta tarifa es el minimo
+						System.out.println("Calcular Coste: "+this.getClass().getName()+"--"+this.getCoste());
 						ll.setCoste(costeMinuto);
 						ll.setTarifa(this);
 						return costeMinuto;
@@ -75,24 +80,24 @@ public abstract class Tarifa   implements Serializable{
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String n) {
+		this.nombre = n;
 	}
 
 	public PeriodoSemana getPeriodoSemana() {
 		return periodoSemana;
 	}
 
-	public void setPeriodoSemana(PeriodoSemana periodoSemana) {
-		this.periodoSemana = periodoSemana;
+	public void setPeriodoSemana(PeriodoSemana pSemana) {
+		this.periodoSemana = pSemana;
 	}
 
 	public Tarifa getTarifa() {
 		return tarifa;
 	}
 
-	public void setTarifa(Tarifa tarifa) {
-		this.tarifa = tarifa;
+	public void setTarifa(Tarifa t) {
+		this.tarifa = t;
 	}
 
 	@Override

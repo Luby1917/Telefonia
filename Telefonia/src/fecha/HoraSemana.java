@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class HoraSemana implements Serializable {
 	
@@ -13,7 +14,7 @@ public class HoraSemana implements Serializable {
 	 */
 	private static final long serialVersionUID = 3442368762836814291L;
 	Calendar calendar;
-	SimpleDateFormat sdf;
+	//SimpleDateFormat sdf;
 	 private int dayOfWeek;
 	 private int hour;
 	 private int minute;
@@ -23,7 +24,7 @@ public class HoraSemana implements Serializable {
 	
 
 	public HoraSemana() {
-		sdf = new SimpleDateFormat("kk:mm:ss");
+		//sdf = new SimpleDateFormat("kk:mm:ss");
 		calendar = GregorianCalendar.getInstance();
 		this.dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		this.hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -33,7 +34,7 @@ public class HoraSemana implements Serializable {
 	}
 
 	public String toString() {
-		return Dia.getDia(dayOfWeek).getDescripcion()+" "+sdf.format(calendar.getTime());
+		return Dia.getDia(dayOfWeek-1).getDescripcion()+" "+hour+":"+minute+":"+seconds;//sdf.format(calendar.getTime());
 
 	}
 
@@ -57,14 +58,16 @@ public class HoraSemana implements Serializable {
 	
 	public void setHora(int hora, int min, int seg){
 		calendar.set(0, 0, 0, hora, min, seg);
+		
 		this.hour = hora;
 		this.minute = min;
 		this.seconds = seg;
+		
 	}
 	
 	public void setDiaSemana(int diaSemana){
-		calendar.set(Calendar.DAY_OF_WEEK, diaSemana);
-		this.dayOfWeek = diaSemana;		
+		calendar.set(Calendar.DAY_OF_WEEK, (diaSemana));
+		this.dayOfWeek = diaSemana;	//TODO
 	}
 
 	public int compareTo(HoraSemana f) {

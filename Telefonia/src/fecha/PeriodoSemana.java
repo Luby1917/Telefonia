@@ -26,12 +26,12 @@ public class PeriodoSemana  implements Serializable{
 		return horaFin;
 	}
 
-	public void setHoraIni(HoraSemana horaIni) {
-		this.horaIni = horaIni;
+	public void setHoraIni(HoraSemana hIni) {
+		this.horaIni = hIni;
 	}
 
-	public void setHoraFin(HoraSemana horaFin) {
-		this.horaFin = horaFin;
+	public void setHoraFin(HoraSemana hFin) {
+		this.horaFin = hFin;
 	}
 	
 	public boolean estaDentro(Fecha h){
@@ -42,6 +42,6 @@ public class PeriodoSemana  implements Serializable{
 	}
 	
 	public String toString(){
-		return horaIni.toString()+" a "+ horaFin.toString()+"\n";
+		return horaIni.toString()+" a "+ horaFin.toString()+"";
 	}
 }

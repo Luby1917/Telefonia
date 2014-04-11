@@ -2,13 +2,13 @@ package fecha;
 
 
 public enum Dia {
+	DOMINGO("Domingo"),
 	LUNES("Lunes"),
 	MARTES("Martes"),
 	MIERCOLES("Miercoles"),
 	JUEVES("Jueves"),
 	VIERNES("Viernes"),
 	SABADO("Sabado"),
-	DOMINGO("Domingo"),
 	TODA_LA_SEMANA("Toda la semana");
 
 	private String descripcion;
@@ -26,6 +26,10 @@ public enum Dia {
 		return ordinal();
 	}
 	public static Dia getDia(int posicion) {//Index out of bound exception
+		if (posicion<0)
+			posicion*=-1;
+		//else if (posicion>values().length)
+			//posicion = (posicion%values().length);
 		return values()[posicion];
 	}
 

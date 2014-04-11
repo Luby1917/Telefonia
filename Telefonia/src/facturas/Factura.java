@@ -32,10 +32,10 @@ public class Factura implements InterfazFecha, Serializable {
 
 	}
 
-	public Factura(Tarifa tarifaAplicada) {
+	public Factura(Tarifa tarifa) {
 		this.periodoFacturacion = new Periodo();
 		this.minutosConsumidos = 0;
-		this.tarifaAplicada = tarifaAplicada;
+		this.tarifaAplicada = tarifa;
 		this.llamadas = new ArrayList<Llamada>();
 		this.textoLlamadas = "";
 		this.id = codBase++;

@@ -31,6 +31,7 @@ public class FactoriaTarifas   implements Serializable{
 		int nDia = tipoTarifa.getDia().getNdia();
 		int horaInicio = tipoTarifa.getFranjaHoraria().getHoraInicio();
 		int horaFinal = tipoTarifa.getFranjaHoraria().getHoraFin();
+	
 		HoraSemana hIni = new HoraSemana();
 		HoraSemana hFin = new HoraSemana();
 		if (nDia > 7) {
@@ -44,6 +45,8 @@ public class FactoriaTarifas   implements Serializable{
 			hFin.setDiaSemana(nDia);
 			hFin.setHora(horaFinal, 0, 0);
 		}
+		
+		//System.out.println(hIni+" - "+hFin);
 		Tarifa tarifaAdicional;
 		if (t == null)
 			tarifaAdicional = new TarifaBasica(

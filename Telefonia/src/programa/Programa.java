@@ -36,7 +36,7 @@ public class Programa {
 
 	private static void cargar() {
 		try {
-			FileInputStream fis = new FileInputStream("cartera.bin");
+			FileInputStream fis = new FileInputStream("cartera2.bin");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			cc = (CarteraClientes) ois.readObject();
 			ois.close();
