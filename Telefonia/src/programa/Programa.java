@@ -1,11 +1,14 @@
 package programa;
 
+import gui.Controlador;
+import gui.ControladorImp;
+import gui.Vista;
+import gui.VistaImp;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import menu.Menu;
 
 import carteraclientes.CarteraClientes;
 
@@ -14,17 +17,29 @@ public class Programa {
 
 	public static void main(String[] args) {
 		cargar();
+		//Iniciador ini = new Iniciador();
+		//cc = ini.get();
 		ejecuta();
 		guardar();
 	}
 
 	public static void ejecuta() {
-		new Menu(cc);
+		
+		Vista vista = new VistaImp();
+		Controlador controlador = new ControladorImp();
+		vista.setControlador(controlador);
+		vista.setModelo(cc);
+		controlador.setModelo(cc);
+		controlador.setVista(vista);
+		cc.setVista(vista);
+		
+		vista.crear();
+		vista.mostrar();
 	}
 
 	private static void guardar() {
 		try {
-			FileOutputStream fos = new FileOutputStream("cartera2.bin");
+			FileOutputStream fos = new FileOutputStream("cartera3.bin");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(cc);
 			oos.close();
@@ -36,7 +51,7 @@ public class Programa {
 
 	private static void cargar() {
 		try {
-			FileInputStream fis = new FileInputStream("cartera2.bin");
+			FileInputStream fis = new FileInputStream("cartera3.bin");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			cc = (CarteraClientes) ois.readObject();
 			ois.close();

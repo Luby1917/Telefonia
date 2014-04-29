@@ -20,15 +20,20 @@ import excepciones.ObjetoNoEncontrado;
 import excepciones.ObjetoYaExistente;
 import facturas.Factura;
 import fecha.Periodo;
+import gui.Vista;
 
-public class CarteraClientes implements Serializable {
+public class CarteraClientes implements  Modelo {
 
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8442861740042767296L;
+	/**
+	 * 
+	 */
 	private Map<String, Cliente> clientes;
+	private Vista miVista;
 
 	public CarteraClientes() {
 		clientes = new TreeMap<String, Cliente>();
@@ -192,6 +197,12 @@ public class CarteraClientes implements Serializable {
 			}
 		}
 		return l;
+	}
+
+	@Override
+	public void setVista(Vista v) {
+		miVista = v;
+		
 	}
 
 }
