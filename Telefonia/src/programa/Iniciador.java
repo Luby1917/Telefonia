@@ -12,7 +12,6 @@ import generador.Generador;
 
 public class Iniciador {
 	static CarteraClientes cc;
-	//public static void main(String[] args) {
 	public Iniciador(){
 		cc = new CarteraClientes();
 		
@@ -58,13 +57,7 @@ public class Iniciador {
 				
 				c.emitirFactura();
 			}
-			Factura fac;
-			Iterator<Factura> it = c.getFacturas().iterator();
-			while (it.hasNext()) {
-				fac = it.next();
-				System.out.println(fac);
-			}
-			
+						
 		}
 		gn = null;
 		//new Menu(cc);

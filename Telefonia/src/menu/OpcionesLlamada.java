@@ -3,16 +3,17 @@ package menu;
 public enum OpcionesLlamada implements Opciones{
 
 
-	ATRAS("Atras"),
-	NUEVA("Nueva llamada"),
-	BUSCAR("Buscar una llamada"),
-	LISTAR("Listar llamadas "),
-	LISTAR_FECHA("Listar facturas que llamadas realizadas entre dos fechas");
+	NUEVA("Nueva llamada", "NUEVA"),
+	BUSCAR("Buscar una llamada", "BUSCAR"),
+	LISTAR("Listar llamadas","LISTAR"),
+	LISTAR_FECHA("Listar facturas que llamadas realizadas entre dos fechas","LISTAR_FECHA");
 	
 	String descripcion;
+	String action;
 	
-	private OpcionesLlamada(String descripcion){
+	private OpcionesLlamada(String descripcion, String action){
 		this.descripcion = descripcion;
+		this.action = action;
 	}
 	@Override
 	public OpcionesLlamada getOpcion(int posicion) {
@@ -34,6 +35,11 @@ public enum OpcionesLlamada implements Opciones{
 	@Override
 	public int size(){
 		return values().length;
+	}
+	@Override
+	public String getAction() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

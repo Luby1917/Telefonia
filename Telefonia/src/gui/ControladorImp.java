@@ -27,7 +27,7 @@ public class ControladorImp implements Controlador {
 		}
 		String[] a = listaDNI.toArray(new String[listaDNI.size()]);
 		return a;
-		
+	
 	}
 	
 	public String[] listarFacturas(String NIF){
