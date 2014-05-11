@@ -3,18 +3,19 @@ package menu;
 
 public enum OpcionesCliente  implements Opciones{
 	
-	ATRAS("Atras"),
-	NUEVO("Alta nueva"),
-	BORRAR("Borrar cliente"),
-	CAMBIAR_TARIFA("Cambiar tarifa cliente"),
-	BUSCAR("Buscar cliente"),
-	LISTAR_CLIENTES("Listar todos los clientes"),
-	LISTAR_CLIETES_FECHA("Listar todos los clientes dados de alta entre dos fechas");
+	NUEVO("Alta nueva","NUEVO"),
+	BORRAR("Borrar cliente","BORRAR"),
+	CAMBIAR_TARIFA("Cambiar tarifa cliente","CAMBIAR"),
+	BUSCAR("Buscar cliente","BUSCAR"),
+	LISTAR_CLIENTES("Listar todos los clientes","LISTAR"),
+	LISTAR_CLIETES_FECHA("Listar todos los clientes dados de alta entre dos fechas","LISTAR_FECHA");
 	
 	String descripcion;
+	String action;
 	
-	private OpcionesCliente(String descripcion){
+	private OpcionesCliente(String descripcion, String action){
 		this.descripcion = descripcion;
+		this.action = action;
 	}
 	@Override
 	public OpcionesCliente getOpcion(int posicion) {
@@ -23,6 +24,10 @@ public enum OpcionesCliente  implements Opciones{
 	@Override
 	public String getDescripcion(){
 		return descripcion;
+	}
+	@Override
+	public String getAction(){
+		return action;
 	}
 	@Override
 	public String listar() {

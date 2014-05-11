@@ -1,10 +1,9 @@
 package menu;
 
 public interface Opciones {
-	public Opciones getOpcion(int posicion);
-	public String getDescripcion();
-	public String listar();
-	public int size();
-	
-
+	Opciones getOpcion(int posicion);
+	String getDescripcion();
+	String listar();
+	int size();
+	String getAction();
 }

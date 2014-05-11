@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.swing.SwingUtilities;
+
 import carteraclientes.CarteraClientes;
 
 public class Programa {
@@ -17,24 +19,34 @@ public class Programa {
 
 	public static void main(String[] args) {
 		cargar();
-		//Iniciador ini = new Iniciador();
-		//cc = ini.get();
 		ejecuta();
 		guardar();
 	}
 
 	public static void ejecuta() {
 		
-		Vista vista = new VistaImp();
+		final Vista vista = new VistaImp();
 		Controlador controlador = new ControladorImp();
 		vista.setControlador(controlador);
 		vista.setModelo(cc);
 		controlador.setModelo(cc);
 		controlador.setVista(vista);
 		cc.setVista(vista);
-		
+		/*
 		vista.crear();
 		vista.mostrar();
+		*/
+		
+		SwingUtilities.invokeLater(new Runnable() {
+		@Override
+		public void run() {
+			vista.crear();
+			vista.mostrar();
+		}
+		});
+		
+		
+		
 	}
 
 	private static void guardar() {
@@ -56,8 +68,9 @@ public class Programa {
 			cc = (CarteraClientes) ois.readObject();
 			ois.close();
 		} catch (Exception e) {
-			System.out.println("Fallo al intentar cargar el programa");
-			cc = new CarteraClientes();
+			System.out.println("Fallo al intentar cargar el programa\nGenerando una nueva base de datos");
+			Iniciador ini = new Iniciador();
+			cc = ini.get();
 			e.printStackTrace();
 		}
 

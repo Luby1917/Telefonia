@@ -2,16 +2,17 @@ package menu;
 
 public enum OpcionesFactura  implements Opciones{
 	
-	ATRAS("Atras"),
-	EMITIR("Emitir una factura"),
-	BUSCAR("Buscar una factura"),
-	LISTAR("Listar facturas "),
-	LISTAR_FECHA("Listar facturas que fueron emitidas entre dos fechas");
+	EMITIR("Emitir una factura","EMITIR"),
+	BUSCAR("Buscar una factura","BUSCAR"),
+	LISTAR("Listar facturas", "LISTAR"),
+	LISTAR_FECHA("Listar facturas que fueron emitidas entre dos fechas","LISTAR_FECHA");
 	
 	String descripcion;
+	String action;
 	
-	private OpcionesFactura(String descripcion){
+	private OpcionesFactura(String descripcion, String action){
 		this.descripcion = descripcion;
+		this.action = action;
 	}
 	@Override
 	public OpcionesFactura getOpcion(int posicion) {
@@ -33,6 +34,11 @@ public enum OpcionesFactura  implements Opciones{
 	@Override
 	public int size(){
 		return values().length;
+	}
+	@Override
+	public String getAction() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 
