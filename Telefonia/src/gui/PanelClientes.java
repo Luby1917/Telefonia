@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import cliente.Cliente;
 
@@ -21,40 +22,47 @@ public class PanelClientes extends JPanel {
 	 */
 	private static final long serialVersionUID = 69433833837296703L;
 	
-	Cliente cliente;
-	
-	
-	
+		
+	private JLabel labelNombre;
+	private JLabel labelApellido;
+	private JLabel labelDNI;
+	private JLabel labelTelefono;
+	private JLabel labelDireccion;
+	private JLabel labelTarifa;
 	
 		
-	JLabel labelNombre;
-	JLabel labelApellido;
-	JLabel labelDNI;
-	JLabel labelTelefono;
-	JLabel labelDireccion;
-	JLabel labelTarifa;
-	
-		
-	JTextField textFieldNombre;
-	JTextField textFieldApellido;
-	JTextField textFieldDNI;
-	JTextField textFieldTelefono;
+	private JTextField textFieldNombre;
+	private JTextField textFieldApellido;
+	private JTextField textFieldDNI;
+	private JTextField textFieldTelefono;
 
-	JPanel panelSuperior;
-	JPanel panelCentral;
-	JPanel panelInferior;
+	private PanelTarifa panelTarifa;
+	private PanelDireccion panelDireccion;
+	
+	
+	private JPanel panelSuperior;
+	private JPanel panelCentral;
+	private JPanel panelInferior;
+	
+	
 	
 	public PanelClientes(){
 		super();
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
 		panelSuperior = new JPanel();
-		//panelSuperior.setBackground(Color.BLUE);
+		panelSuperior.setBackground(Color.WHITE);
+		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.PAGE_AXIS));
+		
+		panelCentral = new JPanel();
+		panelCentral.setBackground(Color.GRAY);
+		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.PAGE_AXIS));
 		
 		panelInferior = new JPanel();
-		//panelInferior.setBackground(Color.GRAY);
+		panelInferior.setBackground(Color.DARK_GRAY);
+		panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.PAGE_AXIS));
 		
-		panelSuperior.setLayout(new GridLayout(7, 2, 10, 10));
+		panelSuperior.setLayout(new GridLayout(4, 2, 10, 10));
 		
 		labelNombre = new JLabel("Nombre");
 		labelNombre.setPreferredSize(new Dimension(80,20));
@@ -62,12 +70,18 @@ public class PanelClientes extends JPanel {
 		labelDNI = new JLabel("NIF");
 		labelTelefono = new JLabel("Telefono");
 		labelDireccion = new JLabel("Direccion");
+		labelDireccion.setHorizontalTextPosition(SwingConstants.LEFT);
 		labelTarifa = new JLabel("Tarifa");
+		labelTarifa.setHorizontalTextPosition(SwingConstants.LEFT);
+
 		
 		textFieldNombre = new JTextField("Nombre");
 		textFieldApellido = new JTextField("Apellido");
 		textFieldDNI = new JTextField("NIF");
 		textFieldTelefono = new JTextField("Telefono");
+		
+		panelTarifa = new PanelTarifa();
+		panelDireccion = new PanelDireccion();
 		
 		panelSuperior.add(labelNombre);
 		panelSuperior.add(textFieldNombre);
@@ -77,10 +91,13 @@ public class PanelClientes extends JPanel {
 		panelSuperior.add(textFieldDNI);
 		panelSuperior.add(labelTelefono);
 		panelSuperior.add(textFieldTelefono);
-		panelSuperior.add(labelDireccion);
-		panelSuperior.add(labelTarifa);
+		panelCentral.add(labelDireccion);
+		panelCentral.add(panelDireccion);
+		panelCentral.add(labelTarifa);
+		panelCentral.add(panelTarifa);
 		
 		add(panelSuperior, BorderLayout.NORTH);
+		add(panelCentral, BorderLayout.CENTER);
 		add(panelInferior, BorderLayout.SOUTH);
 	}
 	
@@ -115,7 +132,9 @@ public class PanelClientes extends JPanel {
 		
 	}
 	
-	public void mostrarCliente(){
+	public void mostrarCliente(Cliente c){
+		
+		
 		setEditable(false);
 		
 	}

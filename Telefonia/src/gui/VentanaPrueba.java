@@ -6,7 +6,7 @@ public class VentanaPrueba {
 	public static void main(String [] args){
 		JFrame frm = new JFrame("Ventana");
 		
-		PanelTarifas pt =new PanelTarifas();
+		PanelTarifa pt =new PanelTarifa();
 		PanelDireccion pd = new PanelDireccion();
 		//frm.getContentPane().add(pt);
 		frm.setContentPane(pd);

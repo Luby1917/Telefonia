@@ -6,17 +6,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import cliente.Direccion;
+
 public class PanelDireccion extends JPanel {
-	
-	
 	private static final long serialVersionUID = -3823290491698784752L;
 	
-	JLabel labelCodPostal;
-	JLabel labelProvincia;
-	JLabel labelPoblacion;
-	JTextField textCodPostal;
-	JTextField textProvincia;
-	JTextField textPoblacion;
+	private JLabel labelCodPostal;
+	private JLabel labelProvincia;
+	private JLabel labelPoblacion;
+	private JTextField textCodPostal;
+	private JTextField textProvincia;
+	private JTextField textPoblacion;
 	
 	public PanelDireccion(){
 		super();
@@ -48,6 +48,23 @@ public class PanelDireccion extends JPanel {
 	public String getPoblacion() {
 		return textPoblacion.getText();
 	}
-
+	public void mostrarDireccion(Direccion d){
+		labelCodPostal.setText(String.valueOf(d.getCodPostal()));
+		labelProvincia.setText(d.getProvincia());
+		labelPoblacion.setText(d.getPoblacion());
+		setEditable(false);
+	}
+	
+	public void nuevaDireccion(){
+		labelCodPostal.setText("");
+		labelProvincia.setText("");
+		labelPoblacion.setText("");
+	}
+	
+	private void setEditable(boolean editable){
+		textCodPostal.setEditable(editable);
+		textProvincia.setEditable(editable);
+		textPoblacion.setEditable(editable);
+	}
 
 }

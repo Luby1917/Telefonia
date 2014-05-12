@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import tarifas.TarifasExtraDiaGratis;
 import tarifas.TarifasExtraFranjaHoraria;
 
-public class PanelTarifas extends JPanel{
+public class PanelTarifa extends JPanel{
 	
 	/**
 	 * 
@@ -20,12 +20,12 @@ public class PanelTarifas extends JPanel{
 	private static final long serialVersionUID = 5367590239077074168L;
 	
 	
-	JCheckBox tarifaHorasRebajadas;
-	JCheckBox tarifaDiaGratis;
-	JComboBox<String> horasRebajadas;
-	JComboBox<String> diaGratis;
+	private JCheckBox tarifaHorasRebajadas;
+	private JCheckBox tarifaDiaGratis;
+	private JComboBox<String> horasRebajadas;
+	private JComboBox<String> diaGratis;
 	
-	public PanelTarifas(){
+	public PanelTarifa(){
 		super();
 		setLayout(new GridLayout(2,2));
 		
@@ -64,7 +64,7 @@ public class PanelTarifas extends JPanel{
 		String[] opcionesDiasGratis = new String[size];
 		opcionesDiasGratis[0]="...";
 		for(int i = 0; i < size-1;i++){
-			opcionesDiasGratis[i+1] = TarifasExtraDiaGratis.values()[i].toString();
+			opcionesDiasGratis[i+1] = TarifasExtraDiaGratis.values()[i].getNombre();
 		}
 		diaGratis.setModel(new DefaultComboBoxModel<String>(opcionesDiasGratis));
 
@@ -72,7 +72,7 @@ public class PanelTarifas extends JPanel{
 		String[] opcionesFranjaHoraria = new String[size];
 		opcionesFranjaHoraria[0]="...";
 		for(int i = 0; i < size-1;i++){
-			opcionesFranjaHoraria[i+1] = TarifasExtraFranjaHoraria.values()[i].toString();
+			opcionesFranjaHoraria[i+1] = TarifasExtraFranjaHoraria.values()[i].getNombre();
 		}
 		horasRebajadas.setModel(new DefaultComboBoxModel<String>(opcionesFranjaHoraria));
 
@@ -100,6 +100,20 @@ public class PanelTarifas extends JPanel{
 		else
 			return seleccion;
 	}
+	
+	
+	public void setHorasRebajadas(TarifasExtraFranjaHoraria horas){
+		horasRebajadas.setSelectedItem(horas.getNombre());
+		
+	
+	}
+	
+	public void setDiaGratis(TarifasExtraDiaGratis dia ){
+		diaGratis.setSelectedItem(dia.getNombre());
+		
+		
+	}
+	
 	
 
 }
