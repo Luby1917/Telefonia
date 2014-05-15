@@ -9,6 +9,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import tarifas.Tarifa;
 import tarifas.TarifasExtraDiaGratis;
 import tarifas.TarifasExtraFranjaHoraria;
 
@@ -104,16 +105,44 @@ public class PanelTarifa extends JPanel{
 	
 	public void setHorasRebajadas(TarifasExtraFranjaHoraria horas){
 		horasRebajadas.setSelectedItem(horas.getNombre());
-		
-	
 	}
 	
 	public void setDiaGratis(TarifasExtraDiaGratis dia ){
 		diaGratis.setSelectedItem(dia.getNombre());
+	}
 		
-		
+	private void setEditable(boolean editable){
+		diaGratis.setEditable(editable);
+		horasRebajadas.setEditable(editable);
+				
 	}
 	
+	public void nuevaTarifa(){
+		diaGratis.setSelectedIndex(0);
+		horasRebajadas.setSelectedIndex(0);
+		tarifaHorasRebajadas.setSelected(false);
+		tarifaDiaGratis.setSelected(false);
+		setEditable(true);
+	}
 	
+	public void mostrarTarifa(Tarifa tarifa){//TODO Recorrer la tarifa
+		while (tarifa != null){
+			try{
+				horasRebajadas.setSelectedItem(tarifa.getNombre());
+			}catch (Exception e){
+			}
+			try{
+			diaGratis.setSelectedItem(tarifa.getNombre());
+			}catch (Exception e){
+
+			}
+			tarifa = tarifa.getTarifa();
+		}
+		setEditable(false);	
+	}
+	
+	public void modificarTarifa(){
+		setEditable(true);
+	}
 
 }

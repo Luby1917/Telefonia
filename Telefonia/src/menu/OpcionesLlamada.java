@@ -38,8 +38,7 @@ public enum OpcionesLlamada implements Opciones{
 	}
 	@Override
 	public String getAction() {
-		// TODO Auto-generated method stub
-		return null;
+		return action;
 	}
 	
 

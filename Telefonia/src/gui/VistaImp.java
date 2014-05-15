@@ -20,12 +20,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import cliente.Cliente;
 
 import menu.Opciones;
 import menu.OpcionesCliente;
 import menu.OpcionesFactura;
 import menu.OpcionesLlamada;
 import carteraclientes.Modelo;
+import excepciones.ListaVaciaException;
 
 
 public class VistaImp implements Vista{
@@ -39,11 +45,14 @@ public class VistaImp implements Vista{
 	JFrame frm;
 	Container panelPrincipal;
 	LayoutManager lay;
-	EscuchadorRaton er;
-
-
+	
+	JTabbedPane panelDePestanas;
+	JPanel pestanaClientes, pestanaFacturas, pestanaLlamadas;
+	JPanel  botoneraClientes, botoneraFacturas, botoneraLlamadas;
+	JList<String> listaFacturas, listaClientes, listaLlamadas;
+	int indiceClientes, indiceFacturas, indiceLlamadas;
+	
 	public VistaImp() {
-		er = new EscuchadorRaton();
 	}
 	
 	public void crear(){
@@ -53,11 +62,13 @@ public class VistaImp implements Vista{
 		//frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frm.addWindowListener(new EscuchadorVentana());
 		panelPrincipal = frm.getContentPane();
-		JTabbedPane panelDePestanas = new JTabbedPane(JTabbedPane.TOP);
+		panelDePestanas = new JTabbedPane(JTabbedPane.TOP);
 		panelPrincipal.add(panelDePestanas);
 
+		
+		
 		//CLIENTES
-		JPanel pestanaClientes = new JPanel();
+		pestanaClientes = new JPanel();
 		pestanaClientes.setLayout(new BorderLayout());
 		panelDePestanas.add("Clientes",  pestanaClientes);
 		
@@ -69,7 +80,7 @@ public class VistaImp implements Vista{
 	
 	
 		//BOTONERA
-		JPanel  botoneraClientes = new JPanel();
+		botoneraClientes = new JPanel();
 		botoneraClientes.setLayout(new FlowLayout());
 		superiorClientes.add(botoneraClientes, FlowLayout.LEFT);
 		
@@ -77,21 +88,12 @@ public class VistaImp implements Vista{
 		
 		//LISTA//TODO error en el scroll/lista
 		String[] listadoDNI = miControlador.listarClientes();
-		if (listadoDNI==null){
-			System.out.println("NULL");
-		}
-		//Compruebo de que ningun elemento de listadoDNI sea null
-		for(int i = 0; i <listadoDNI.length; i++) {
-			if(listadoDNI[i]==null){
-				System.out.println("NULL "+i);
-			}else{
-				System.out.println(listadoDNI[i]);
-			}
-		}
-		
-		JList<String> listaClientes = new JList<String>(listadoDNI);
+			
+		listaClientes = new JList<String>(listadoDNI);
+		listaClientes.setFixedCellWidth(80);
 		//listaClientes.setVisibleRowCount(10);
-		
+		listaClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	
 		
 		JScrollPane scroll = new JScrollPane(listaClientes);
 		pestanaClientes.add(scroll, BorderLayout.WEST);
@@ -99,100 +101,142 @@ public class VistaImp implements Vista{
 		
 		
 		//ZONA CENTRAL
-		JPanel centroClientes = new JPanel(new BorderLayout());
-		pestanaClientes.add(centroClientes,BorderLayout.CENTER);
+		final PanelClientes panelClientes = new PanelClientes(this);
+		
+		pestanaClientes.add(panelClientes,BorderLayout.CENTER);
 		//ZONA INFERIOR
 		JLabel textoInferiorClientes = new JLabel("Ultima accion clientes");
 		pestanaClientes.add(textoInferiorClientes,BorderLayout.SOUTH);
-		
-		
-		
-		
-		
-		
-		
-		/*
+				
 		//FACTURAS
-		JPanel pestanaFacturas = new JPanel();
+		pestanaFacturas = new JPanel();
 		panelDePestanas.addTab("Facturas", null, pestanaFacturas, null);
 		pestanaFacturas.setLayout(new BorderLayout());
 		
 		//TOP
-		
 		JPanel superiorFacturas = new JPanel();
 		superiorFacturas.setLayout(new GridLayout(2,1));
 		pestanaFacturas.add(superiorFacturas , BorderLayout.NORTH);
-	
-		
+			
 		//BOTONERA
-		JPanel  botoneraFacturas = new JPanel();
+		botoneraFacturas = new JPanel();
 		botoneraFacturas.setLayout(new FlowLayout());
 		superiorFacturas.add(botoneraFacturas, FlowLayout.LEFT);
 		
-		contruirBotonera(OpcionesFactura.class, botoneraFacturas);
+		contruirBotonera(OpcionesFactura.class, botoneraFacturas, "Facturas");
 
 		//LISTA	
-		String[] listadoFacturas = miControlador.listarClientes();//TODO
-		JList<String> listaFacturas = new JList<String>(listadoFacturas);
+		listaFacturas = new JList<String>();
+		listaFacturas.setFixedCellWidth(80);
 		pestanaFacturas.add(new JScrollPane(listaFacturas), BorderLayout.WEST);
 		
 		//ZONA CENTRAL
-		JPanel centroFacturas = new JPanel(new BorderLayout());
-		pestanaFacturas.add(centroFacturas, BorderLayout.CENTER);
+		PanelFactura panelFactura = new PanelFactura(this);
+		pestanaFacturas.add(panelFactura, BorderLayout.CENTER);
 		//ZONA INFERIOR
 		JLabel textoInferiorFacturas = new JLabel("Ultima accion facturas");
 		pestanaFacturas.add(textoInferiorFacturas, BorderLayout.SOUTH);
 		
 		//LLAMADAS
-		JPanel pestanaLlamadas = new JPanel();
+		pestanaLlamadas = new JPanel();
 		panelDePestanas.addTab("Llamadas", null, pestanaLlamadas, null);
 		pestanaLlamadas.setLayout(new BorderLayout());
 		
 		//TOP
-		
 		JPanel superiorLlamadas = new JPanel();
 		superiorLlamadas.setLayout(new GridLayout(2,1));
 		pestanaLlamadas.add(superiorLlamadas, BorderLayout.NORTH);
-		
 			
 		//BOTONERA
-		JPanel  botoneraLlamadas = new JPanel();
+		botoneraLlamadas = new JPanel();
 		botoneraLlamadas.setLayout(new FlowLayout());
-		contruirBotonera(OpcionesLlamada.class, botoneraLlamadas);
+		contruirBotonera(OpcionesLlamada.class, botoneraLlamadas, "Llamadas");
 		superiorLlamadas.add(botoneraLlamadas, FlowLayout.LEFT);
 		
 		//LISTA
-		String[] listadoLlamadas = miControlador.listarClientes();//TODO
-		JList<String> listaLlamadas = new JList<String>(listadoLlamadas);
+		listaLlamadas = new JList<String>();
+		listaLlamadas.setFixedCellWidth(120);
 		pestanaLlamadas.add(new JScrollPane(listaLlamadas), BorderLayout.WEST);
 		
 		//ZONA CENTRAL
-		JPanel centroLlamadas = new JPanel(new BorderLayout());
-		pestanaLlamadas.add(centroLlamadas, BorderLayout.CENTER);
+		PanelLlamada panelLlamada = new PanelLlamada(this);
+		pestanaLlamadas.add(panelLlamada, BorderLayout.CENTER);
 		//ZONA INFERIOR
 		JLabel textoInferiorLlamadas = new JLabel("Ultima accion llamadas");
 		pestanaLlamadas.add(textoInferiorLlamadas, BorderLayout.SOUTH);
-		*/
+			
+		
+		
+		listaClientes.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent event) {
+				indiceClientes = event.getFirstIndex();
+				Cliente c = miControlador.getCliente(listaClientes.getSelectedValue());
+				panelClientes.mostrarCliente(c);
+				
+				
+			}
+		});
+		
+		listaFacturas.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent event) {
+				indiceClientes = event.getFirstIndex();
+				
+				
+			}
+		});
+		
+		listaLlamadas.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent event) {
+				indiceClientes = event.getFirstIndex();
+				
+				
+			}
+		});
+		
+
+		actualizar();
+		
 	}
 	
 	private void contruirBotonera(Class opciones, JPanel botonera, String name){
 		Object[] values = opciones.getEnumConstants();
-	    for (Object value : values) {
+		ActionListener escuchador = null;
+		switch(name){
+		case "Clientes":
+			escuchador = new EscuchadorBotonesCliente();
+			break;
+		case "Facturas":
+			escuchador = new EscuchadorBotonesFactura();
+			break;
+		case "Llamadas":
+			escuchador = new EscuchadorBotonesLlamada();
+			break;
+		}
+		for (Object value : values) {
 			JButton b = new JButton(((Opciones)value).getDescripcion());
 			b.setName(name);
 			b.setActionCommand(((Opciones)value).getAction());
-			b.addActionListener(er);
+			b.addActionListener(escuchador);
 			botonera.add(b);
 		}
 	}
 	
+	public void actualizar(){
+		pestanaLlamadas.updateUI();
+		pestanaClientes.updateUI();
+		pestanaFacturas.updateUI();
+	}
 	
 	
 	public void mostrar (){
+		actualizar();
 		frm.pack();
 		frm.setVisible(true);
 	}
-	
+
 	
 	private class EscuchadorVentana extends WindowAdapter{
 		@Override
@@ -202,80 +246,19 @@ public class VistaImp implements Vista{
 		}
 		
 	}
-	private class EscuchadorRaton implements ActionListener, Serializable{
-
-		private static final long serialVersionUID = 8381362575484575192L;
-		
-		
-		
-
-		@Override
-		public void actionPerformed(ActionEvent event) {
-
-			JButton b = (JButton) event.getSource();
-			switch(b.getName()){
-			case "Clientes":
-				switch(b.getActionCommand()){
-				case "ATRAS":
-					System.out.println(b.getActionCommand());
-					break;
-				case "NUEVO":
-					System.out.println(b.getActionCommand());
-					break;
-				case "BORRAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "CAMBIAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "BUSCAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "LISTAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "LISTAR_FECHA":
-					System.out.println(b.getActionCommand());
-					break;
-				}
-				break;
-			case "Facturas":
-				switch(b.getActionCommand()){
-				case "EMITIR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "BUSCAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "LISTAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "LISTAR_FECHA":
-					System.out.println(b.getActionCommand());
-					break;
-				}
-				break;
-			case "Llamadas":
-				switch(b.getActionCommand()){
-				case "NUEVA":
-					System.out.println(b.getActionCommand());
-					break;
-				case "BUSCAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "LISTAR":
-					System.out.println(b.getActionCommand());
-					break;
-				case "LISTAR_FECHA":
-					System.out.println(b.getActionCommand());
-					break;
-				}
-				break;
-			}
-
-			
+	
+	public void seleccionarPestana(int i){
+		switch(i){
+		case 0:
+			panelDePestanas.setSelectedComponent(pestanaClientes);
+			break;
+		case 1:
+			panelDePestanas.setSelectedComponent(pestanaFacturas);
+			break;
+		case 2:
+			panelDePestanas.setSelectedComponent(pestanaLlamadas);
+			break;
 		}
-		
 	}
 
 	@Override
@@ -286,6 +269,114 @@ public class VistaImp implements Vista{
 	@Override
 	public void setControlador(Controlador c) {
 		miControlador = c;
+	}
+	
+	private class EscuchadorBotonesCliente implements ActionListener, Serializable{
+
+		private static final long serialVersionUID = 8381362575484575192L;
+		
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			JButton b = (JButton) event.getSource();
+			switch(b.getActionCommand()){
+			case "ATRAS":
+				System.out.println(b.getActionCommand());
+				break;
+			case "NUEVO":
+				System.out.println(b.getActionCommand());
+				break;
+			case "BORRAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "CAMBIAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "BUSCAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "LISTAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "LISTAR_FECHA":
+				System.out.println(b.getActionCommand());
+				break;
+			}
+		}
+	}
+
+	private class EscuchadorBotonesFactura implements ActionListener, Serializable{
+
+		private static final long serialVersionUID = -5837266124361773762L;
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			JButton b = (JButton) event.getSource();
+			switch(b.getActionCommand()){
+			case "EMITIR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "BUSCAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "LISTAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "LISTAR_FECHA":
+				System.out.println(b.getActionCommand());
+				break;
+			}
+		}
+	}
+
+	private class EscuchadorBotonesLlamada implements ActionListener, Serializable{
+
+		private static final long serialVersionUID = 7675735510653870155L;
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			JButton b = (JButton) event.getSource();
+			switch(b.getActionCommand()){
+			case "NUEVA":
+				System.out.println(b.getActionCommand());
+				break;
+			case "BUSCAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "LISTAR":
+				System.out.println(b.getActionCommand());
+				break;
+			case "LISTAR_FECHA":
+				System.out.println(b.getActionCommand());
+				break;
+			}
+		}
+	}
+
+	@Override
+	public Modelo getModelo() {
+		return miModelo;
+	}
+
+	@Override
+	public Controlador getControlador() {
+		return miControlador;
+	}
+
+	@Override
+	public String getClienteSeleccionado() {
+		return listaClientes.getSelectedValue();
+	}
+
+	@Override
+	public void setListaFacturas(String[] facturas) {
+		listaFacturas.setListData(facturas);
+		
+	}
+
+	@Override
+	public void setListaLlamadas(String[] llamadas) {
+		listaLlamadas.setListData(llamadas);
+		
 	}
 
 }

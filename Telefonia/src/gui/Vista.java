@@ -6,10 +6,17 @@ import carteraclientes.Modelo;
 
 public interface Vista extends Serializable{
 	
-	public void setModelo(Modelo m);
-	public void setControlador(Controlador c);
-	public void crear();
-	public void mostrar();
+	void setModelo(Modelo m);
+	void setControlador(Controlador c);
+	Modelo getModelo();
+	Controlador getControlador();
+	void crear();
+	void mostrar();
+	void seleccionarPestana(int i);
+	String getClienteSeleccionado();
+	void setListaFacturas(String[] facturas);
+	void setListaLlamadas(String[] llamadas);
+	void actualizar();
 
 
 }

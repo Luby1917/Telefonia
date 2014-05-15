@@ -42,23 +42,27 @@ public class PanelDireccion extends JPanel {
 	public int getCodPostal() {
 		return Integer.parseInt(textCodPostal.getText());
 	}
+	
 	public String getProvincia() {
 		return textProvincia.getText();
 	}
+	
 	public String getPoblacion() {
 		return textPoblacion.getText();
 	}
+	
 	public void mostrarDireccion(Direccion d){
-		labelCodPostal.setText(String.valueOf(d.getCodPostal()));
-		labelProvincia.setText(d.getProvincia());
-		labelPoblacion.setText(d.getPoblacion());
+		textCodPostal.setText(String.valueOf(d.getCodPostal()));
+		textProvincia.setText(d.getProvincia());
+		textPoblacion.setText(d.getPoblacion());
 		setEditable(false);
 	}
 	
 	public void nuevaDireccion(){
-		labelCodPostal.setText("");
-		labelProvincia.setText("");
-		labelPoblacion.setText("");
+		textCodPostal.setText("");
+		textProvincia.setText("");
+		textPoblacion.setText("");
+		setEditable(true);
 	}
 	
 	private void setEditable(boolean editable){
@@ -66,5 +70,12 @@ public class PanelDireccion extends JPanel {
 		textProvincia.setEditable(editable);
 		textPoblacion.setEditable(editable);
 	}
-
+	
+	public void editarDireccion(){
+		setEditable(true);
+	}
+	
+	public Direccion guardarDireccion(){
+		return new Direccion(getCodPostal(), getProvincia(), getPoblacion());
+	}
 }

@@ -32,10 +32,7 @@ public class Programa {
 		controlador.setModelo(cc);
 		controlador.setVista(vista);
 		cc.setVista(vista);
-		/*
-		vista.crear();
-		vista.mostrar();
-		*/
+	
 		
 		SwingUtilities.invokeLater(new Runnable() {
 		@Override

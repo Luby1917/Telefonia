@@ -120,6 +120,8 @@ public class Fecha implements Serializable {
 			return 0;
 
 	}
+	
+
 
 	public int getHora() {
 		return hour;
@@ -135,6 +137,18 @@ public class Fecha implements Serializable {
 
 	public int getDiaSemana() {
 		return dayOfWeek;
+	}
+	
+	public int getDay() {
+		return day;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public int getYear() {
+		return year;
 	}
 
 }

@@ -6,10 +6,11 @@ public class VentanaPrueba {
 	public static void main(String [] args){
 		JFrame frm = new JFrame("Ventana");
 		
-		PanelTarifa pt =new PanelTarifa();
-		PanelDireccion pd = new PanelDireccion();
+		
+		//PanelFactura pf = new PanelFactura(this);
+		
 		//frm.getContentPane().add(pt);
-		frm.setContentPane(pd);
+		//frm.setContentPane(pf);
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frm.pack();
 		frm.setVisible(true);
