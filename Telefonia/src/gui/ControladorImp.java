@@ -38,7 +38,8 @@ public class ControladorImp implements Controlador {
 			for(Factura f : facturas){
 				listaFacturas.add(f.getId()+"");//TODO cambiar la forma de listar las facturas
 			}
-			return (String[]) listaFacturas.toArray();
+			String[] a = listaFacturas.toArray(new String[listaFacturas.size()]);
+			return a;
 		} catch (ObjetoNoEncontrado e) {
 			e.printStackTrace();
 		}
@@ -54,14 +55,14 @@ public class ControladorImp implements Controlador {
 			for(Llamada f : llamadas){
 				listaLlamadas.add(f.getFecha().toString());
 			}
-			return (String[]) listaLlamadas.toArray();
+			String[] a = listaLlamadas.toArray(new String[listaLlamadas.size()]);
+			return a;
 		} catch (ObjetoNoEncontrado e) {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
-	
 	@Override
 	public void setVista(Vista v) {
 		miVista = v;
@@ -72,6 +73,28 @@ public class ControladorImp implements Controlador {
 	public void setModelo(Modelo m) {
 		miModelo = m;
 
+	}
+
+	@Override
+	public Cliente getCliente(String NIF) {
+		Cliente c = null;
+		try {
+			c=miModelo.recuperarDatosClienteNIF(NIF);
+		} catch (ObjetoNoEncontrado e) {
+			System.out.println("Cliente no encontrada con el NIF "+NIF);
+		}
+		return c;
+	}
+
+	@Override
+	public Factura getFactura(int id) {
+		Factura f = null;
+		try {
+			f= miModelo.recuperarDatosFactura(id);
+		} catch (ObjetoNoEncontrado e) {
+			System.out.println("Factura no encontrada con el id "+id);
+		}
+		return f;
 	}
 
 }
