@@ -54,7 +54,6 @@ public class Programa {
 			oos.close();
 		} catch (Exception e) {
 			System.out.println("Fallo al intentar guardar el programa");
-			e.printStackTrace();
 		}
 	}
 
@@ -66,9 +65,8 @@ public class Programa {
 			ois.close();
 		} catch (Exception e) {
 			System.out.println("Fallo al intentar cargar el programa\nGenerando una nueva base de datos");
-			Iniciador ini = new Iniciador();
+			Iniciador ini = new Iniciador(4);//4 clientes con 4 facturas con 4 llamadas cada una
 			cc = ini.get();
-			e.printStackTrace();
 		}
 
 	}

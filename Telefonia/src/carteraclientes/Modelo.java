@@ -47,5 +47,12 @@ public interface Modelo extends Serializable{
 
 	public List<Llamada> listarListadoLlamadasFecha(String NIF, Periodo p)
 			throws ObjetoNoEncontrado;
+	
+	public String[] listarClientes();
+	public String[] listarFacturas(String NIF);
+	public String[] listarLlamadas(String NIF);
+	public Cliente getCliente(String NIF);
+	public Factura getFactura (int id);
+	public Llamada getLlamada (String s);
 
 }

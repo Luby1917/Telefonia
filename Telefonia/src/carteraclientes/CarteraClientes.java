@@ -1,6 +1,5 @@
 package carteraclientes;
 
-
 import interfaces.InterfazFecha;
 
 import java.io.Serializable;
@@ -14,6 +13,7 @@ import java.util.TreeMap;
 
 import llamadas.Llamada;
 import tarifas.Tarifa;
+import tarifas.TarifaBasica;
 import cliente.Cliente;
 import excepciones.ListaVaciaException;
 import excepciones.ObjetoNoEncontrado;
@@ -22,9 +22,8 @@ import facturas.Factura;
 import fecha.Periodo;
 import gui.Vista;
 
-public class CarteraClientes implements  Modelo {
+public class CarteraClientes implements Modelo {
 
-	
 	/**
 	 * 
 	 */
@@ -35,17 +34,20 @@ public class CarteraClientes implements  Modelo {
 	private Map<String, Cliente> clientes;
 	private Vista miVista;
 
+	private Cliente clienteActual;
+
 	public CarteraClientes() {
 		clientes = new TreeMap<String, Cliente>();
 
 	}
 
-	public boolean darDeAltaCliente(Cliente cliente) throws ObjetoYaExistente{
+	public boolean darDeAltaCliente(Cliente cliente) throws ObjetoYaExistente {
 
 		if (!clientes.containsKey(cliente.getNIF()))
 			clientes.put(cliente.getNIF(), cliente);
 		else
-			throw new ObjetoYaExistente("El cliente con el NIF "+ cliente.getNIF()+" ya existe");
+			throw new ObjetoYaExistente("El cliente con el NIF "
+					+ cliente.getNIF() + " ya existe");
 		return true;
 
 	}
@@ -152,7 +154,8 @@ public class CarteraClientes implements  Modelo {
 		return new ArrayList<Cliente>();
 	}
 
-	public List<Factura> listarListadoFacturasFecha(String NIF, Periodo p)	throws ObjetoNoEncontrado {
+	public List<Factura> listarListadoFacturasFecha(String NIF, Periodo p)
+			throws ObjetoNoEncontrado {
 		Cliente c;
 		if (clientes.containsKey(NIF)) {
 			c = clientes.get(NIF);
@@ -164,8 +167,9 @@ public class CarteraClientes implements  Modelo {
 		}
 		return new ArrayList<Factura>();
 	}
-	
-	public List<Llamada> listarListadoLlamadasFecha(String NIF, Periodo p)	throws ObjetoNoEncontrado {
+
+	public List<Llamada> listarListadoLlamadasFecha(String NIF, Periodo p)
+			throws ObjetoNoEncontrado {
 		Cliente c;
 		if (clientes.containsKey(NIF)) {
 			c = clientes.get(NIF);
@@ -187,7 +191,7 @@ public class CarteraClientes implements  Modelo {
 
 		if (c.isEmpty())
 			throw new ListaVaciaException("La lista de esta vacia");
-		
+
 		List<T> l = new ArrayList<T>();
 		Iterator<T> i = c.iterator();
 		while (i.hasNext()) {
@@ -200,9 +204,111 @@ public class CarteraClientes implements  Modelo {
 	}
 
 	@Override
+	public String[] listarClientes() {
+		List<Cliente> clientes = recuperarListadoClientes();
+		List<String> listaDNI = new ArrayList<String>();
+		for (Cliente c : clientes) {
+			listaDNI.add(c.getNIF());
+		}
+		String[] a = listaDNI.toArray(new String[listaDNI.size()]);
+		return a;
+
+	}
+
+	@Override
+	public String[] listarFacturas(String NIF) {
+		List<Factura> facturas = null;
+		try {
+			facturas = recuperarListadoFacturasCliente(NIF);
+			List<String> listaFacturas = new ArrayList<String>();
+			for (Factura f : facturas) {
+				listaFacturas.add(f.getId() + "");
+			}
+			String[] a = listaFacturas
+					.toArray(new String[listaFacturas.size()]);
+			return a;
+		} catch (ObjetoNoEncontrado e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@Override
+	public String[] listarLlamadas(String NIF) {
+		List<Llamada> llamadas = null;
+		try {
+			llamadas = listarLlamadasCliente(NIF);
+			List<String> listaLlamadas = new ArrayList<String>();
+			for (Llamada f : llamadas) {
+				listaLlamadas.add(f.getFecha().toString());
+			}
+			String[] a = listaLlamadas
+					.toArray(new String[listaLlamadas.size()]);
+			return a;
+		} catch (ObjetoNoEncontrado e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@Override
+	public Cliente getCliente(String NIF) {
+		Cliente c = null;
+		try {
+			c = recuperarDatosClienteNIF(NIF);
+			clienteActual = c;
+		} catch (ObjetoNoEncontrado e) {
+			System.out.println("Cliente no encontrada con el NIF " + NIF);
+		}
+		return c;
+	}
+
+	@Override
+	public Factura getFactura(int id) {
+		Factura f = null;
+		try {
+			f = recuperarDatosFactura(id);
+		} catch (ObjetoNoEncontrado e) {
+			System.out.println("Factura no encontrada con el id " + id);
+		}
+		return f;
+	}
+
+	@Override
+	public Llamada getLlamada(String s) {
+		List<Llamada> listaLlamadas = null;
+		Llamada ll = null;
+		try {
+			listaLlamadas = listarLlamadasCliente(clienteActual.getNIF());
+		} catch (ObjetoNoEncontrado e) {
+		}
+
+		Iterator<Llamada> it = listaLlamadas.iterator();
+
+		while (it.hasNext()) {
+			ll = (Llamada) it.next();
+			if (ll.getFecha().toString().equals(s)) {
+				return ll;
+			}
+		}
+		return new Llamada("Telefono cliente", "Telefono destino", 0,
+				new TarifaBasica());
+	}
+
+	@Override
 	public void setVista(Vista v) {
 		miVista = v;
-		
+
+	}
+
+	public Cliente getClienteActual() {
+		return clienteActual;
+	}
+
+	public void setClienteActual(Cliente clienteActual) {
+		this.clienteActual = clienteActual;
 	}
 
 }

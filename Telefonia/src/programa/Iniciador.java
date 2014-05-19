@@ -12,7 +12,7 @@ import generador.Generador;
 
 public class Iniciador {
 	static CarteraClientes cc;
-	public Iniciador(){
+	public Iniciador(int n){
 		cc = new CarteraClientes();
 		
 		Generador gn;
@@ -21,7 +21,7 @@ public class Iniciador {
 		// Genera Clientes
 		Cliente c;
 		gn = new Generador();
-		while (loop < 10) {
+		while (loop < n) {
 		
 			c = gn.generaParticular();
 			String NIF = c.getNIF();
@@ -39,18 +39,18 @@ public class Iniciador {
 				e.printStackTrace();
 			}
 
-			for (int i = 0; i < 10; i++) {// facturas
-				for (int j = 0; j < 10; j++) {// crea llamadas
+			for (int i = 0; i < n; i++) {// facturas
+				for (int j = 0; j < n; j++) {// crea llamadas
 					int duracion = 1+(int) (Math.random() * 9);
 					telefonoDestino = gn.generaTelefono();
 					Llamada l = new Llamada(c.getTelefono(),telefonoDestino, duracion, c.getTarifa());
-					/*
+					
 					try {
-						Thread.sleep(1000);//TODO quitar la espera
+						Thread.sleep(1000);
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.out.println("Fallo inciaciador, generacion de llamadas");
 					}
-					*/
+					
 					c.anadirLlamada(l);
 					
 				}

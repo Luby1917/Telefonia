@@ -105,10 +105,12 @@ public class PanelTarifa extends JPanel{
 	
 	public void setHorasRebajadas(TarifasExtraFranjaHoraria horas){
 		horasRebajadas.setSelectedItem(horas.getNombre());
+		tarifaHorasRebajadas.setSelected(true);
 	}
 	
 	public void setDiaGratis(TarifasExtraDiaGratis dia ){
 		diaGratis.setSelectedItem(dia.getNombre());
+		tarifaDiaGratis.setSelected(true);
 	}
 		
 	private void setEditable(boolean editable){
@@ -129,10 +131,12 @@ public class PanelTarifa extends JPanel{
 		while (tarifa != null){
 			try{
 				horasRebajadas.setSelectedItem(tarifa.getNombre());
+				tarifaHorasRebajadas.setSelected(true);
 			}catch (Exception e){
 			}
 			try{
 			diaGratis.setSelectedItem(tarifa.getNombre());
+			tarifaDiaGratis.setSelected(true);
 			}catch (Exception e){
 
 			}

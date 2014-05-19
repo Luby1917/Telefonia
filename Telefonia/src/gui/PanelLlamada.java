@@ -50,7 +50,7 @@ public class PanelLlamada extends JPanel {
 		labelTelefonoCliente = new JLabel("Telefono cliente");
 		labelTelefonoDestino = new JLabel("Telefono destino");
 		labelDuracion = new JLabel("Duracion");
-		labelCoste = new JLabel("Minutos Consumidos");
+		labelCoste = new JLabel("Coste");
 		labelTarifa = new JLabel("Tarifa");
 		labelFecha = new JLabel("Fecha de la llamada");
 	
@@ -115,11 +115,7 @@ public class PanelLlamada extends JPanel {
 		textDuracion.setEditable(editable);
 		textCoste.setEditable(editable);
 	}
-	
-
-	
-
-	
+		
 	public Fecha getFecha(){
 		Fecha f= new Fecha();
 		f.setFecha(panelFecha.getDia(), panelFecha.getMes(), panelFecha.getAnyo());
